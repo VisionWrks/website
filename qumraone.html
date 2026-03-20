@@ -29,13 +29,23 @@
                 <img src="media/favicon.png" alt="VisionWorks" class="h-16 w-auto">
                 <span class="font-black text-2xl tracking-tighter">Vision<span class="text-brand">Works</span></span>
             </a>
-            <div class="flex items-center gap-6">
+            <div class="flex items-center gap-2">
                 <a href="index.html#contact" class="hidden md:block font-bold text-sm text-slate-600 hover:text-brand transition uppercase tracking-widest" data-en="Contact" data-ar="اتصل بنا">اتصل بنا</a>
                 <div class="flex bg-gray-100 p-1 rounded-xl">
                     <button id="btn-en" class="text-gray-400 px-4 py-1.5 rounded-lg text-sm font-bold hover:text-slate-900 transition">EN</button>
                     <button id="btn-ar" class="bg-brand text-white px-4 py-1.5 rounded-lg text-sm font-bold shadow transition">AR</button>
                 </div>
+                <button id="nav-toggle" class="md:hidden p-2 rounded-xl hover:bg-slate-100 transition" aria-label="Menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
             </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 mt-3 pt-3 pb-2 flex flex-col gap-1">
+            <a href="index.html" class="px-4 py-2 font-bold text-sm text-slate-600 hover:text-brand rounded-xl uppercase tracking-widest" data-en="Home" data-ar="الرئيسية">الرئيسية</a>
+            <a href="index.html#contact" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="px-4 py-2 font-bold text-sm text-slate-600 hover:text-brand rounded-xl uppercase tracking-widest" data-en="Contact" data-ar="اتصل بنا">اتصل بنا</a>
         </div>
     </nav>
 
@@ -44,8 +54,8 @@
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
             <div data-aos="fade-right">
                 <span class="text-brand font-bold uppercase tracking-widest text-sm" data-en="Flagship Product" data-ar="المنتج الرئيسي">المنتج الرئيسي</span>
-                <h1 class="text-7xl font-black mt-4 mb-6">QumraOne</h1>
-                <p class="text-slate-400 text-xl leading-relaxed mb-10" data-en="A visual inspection system built with the customer in mind and quality first — a system that just works without having to think about it twice." data-ar="نظام فحص بصري مبني بأولوية العميل والجودة أولاً — نظام يعمل ببساطة دون الحاجة إلى التفكير مرتين.">نظام فحص بصري مبني بأولوية العميل والجودة أولاً — نظام يعمل ببساطة دون الحاجة إلى التفكير مرتين.</p>
+                <h1 class="text-5xl md:text-7xl font-black mt-4 mb-6">QumraOne</h1>
+                <p class="text-slate-400 text-lg md:text-xl leading-relaxed mb-10" data-en="A visual inspection system built with the customer in mind and quality first — a system that just works without having to think about it twice." data-ar="نظام فحص بصري مبني بأولوية العميل والجودة أولاً — نظام يعمل ببساطة دون الحاجة إلى التفكير مرتين.">نظام فحص بصري مبني بأولوية العميل والجودة أولاً — نظام يعمل ببساطة دون الحاجة إلى التفكير مرتين.</p>
                 <a href="index.html#contact" class="inline-block bg-brand text-white font-bold px-10 py-4 rounded-2xl hover:opacity-90 transition" data-en="Request a Demo" data-ar="طلب عرض تجريبي">طلب عرض تجريبي</a>
             </div>
             <div data-aos="fade-left">
@@ -59,7 +69,7 @@
     <!-- Overview -->
     <section class="py-24 px-6 bg-white">
         <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
-            <h2 class="text-4xl font-black mb-6" data-en="What is QumraOne?" data-ar="ما هو QumraOne؟">ما هو QumraOne؟</h2>
+            <h2 class="text-2xl md:text-4xl font-black mb-6" data-en="What is QumraOne?" data-ar="ما هو QumraOne؟">ما هو QumraOne؟</h2>
             <p class="text-slate-500 text-xl leading-relaxed" data-en="QumraOne is a visual inspection system that integrates with screwdrivers to create a fully failure-proof inspection system for assembly lines. It can also be customized to the specific needs of each customer." data-ar="QumraOne هو نظام فحص بصري يتكامل مع المفكات لإنشاء نظام فحص كامل مضمون الأداء لخطوط التجميع. يمكن أيضاً تخصيصه ليناسب الاحتياجات المحددة لكل عميل.">QumraOne هو نظام فحص بصري يتكامل مع المفكات لإنشاء نظام فحص كامل مضمون الأداء لخطوط التجميع. يمكن أيضاً تخصيصه ليناسب الاحتياجات المحددة لكل عميل.</p>
         </div>
     </section>
@@ -67,7 +77,7 @@
     <!-- Demo Videos -->
     <section class="py-24 px-6 bg-slate-950 text-white">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-5xl font-black mb-4 text-center" data-en="See It in Action" data-ar="شاهده في العمل">شاهده في العمل</h2>
+            <h2 class="text-3xl md:text-5xl font-black mb-4 text-center" data-en="See It in Action" data-ar="شاهده في العمل">شاهده في العمل</h2>
             <p class="text-center text-slate-400 mb-16" data-en="Live demos from real deployments." data-ar="عروض مباشرة من عمليات نشر حقيقية.">عروض مباشرة من عمليات نشر حقيقية.</p>
             <div class="grid md:grid-cols-3 gap-8" id="video-grid">
                 <div data-aos="fade-up" data-aos-delay="0">
@@ -101,7 +111,7 @@
     <!-- Core Features -->
     <section class="py-24 px-6 bg-slate-50">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-5xl font-black mb-16 text-center" data-en="Core Features" data-ar="الميزات الأساسية">الميزات الأساسية</h2>
+            <h2 class="text-3xl md:text-5xl font-black mb-16 text-center" data-en="Core Features" data-ar="الميزات الأساسية">الميزات الأساسية</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="bg-white p-8 rounded-[2rem] shadow-sm border-b-4 border-brand" data-aos="fade-up" data-aos-delay="0">
                     <div class="text-brand text-4xl mb-4">&#9654;</div>
@@ -132,7 +142,7 @@
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
             <div data-aos="fade-right">
                 <span class="text-brand font-bold uppercase tracking-widest text-sm" data-en="Hardware Integration" data-ar="تكامل الأجهزة">تكامل الأجهزة</span>
-                <h2 class="text-5xl font-black mt-4 mb-6" data-en="Screwdriver Integration" data-ar="تكامل المفكات">تكامل المفكات</h2>
+                <h2 class="text-3xl md:text-5xl font-black mt-4 mb-6" data-en="Screwdriver Integration" data-ar="تكامل المفكات">تكامل المفكات</h2>
                 <p class="text-slate-400 text-lg leading-relaxed mb-8" data-en="QumraOne connects with wireless screwdrivers over a secure BLE channel, enabling real-time torque verification alongside visual inspection — all without opening or modifying the driver." data-ar="يتصل QumraOne بالمفكات اللاسلكية عبر قناة BLE آمنة، مما يتيح التحقق الفوري من العزم جنباً إلى جنب مع الفحص البصري — دون الحاجة لفتح المفك أو تعديله.">يتصل QumraOne بالمفكات اللاسلكية عبر قناة BLE آمنة، مما يتيح التحقق الفوري من العزم جنباً إلى جنب مع الفحص البصري — دون الحاجة لفتح المفك أو تعديله.</p>
                 <ul class="space-y-4 text-slate-300 text-sm">
                     <li class="flex items-start gap-3"><span class="text-brand font-black mt-0.5">&#10003;</span><span data-en="Integration via QR code — quick and non-invasive setup" data-ar="التكامل عبر رمز QR — إعداد سريع وغير تدخلي">التكامل عبر رمز QR — إعداد سريع وغير تدخلي</span></li>
@@ -156,7 +166,7 @@
     <!-- Use Cases -->
     <section class="py-32 px-6 bg-white">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-5xl font-black mb-6 text-center" data-en="Beyond Assembly Lines" data-ar="أبعد من خطوط التجميع">أبعد من خطوط التجميع</h2>
+            <h2 class="text-3xl md:text-5xl font-black mb-6 text-center" data-en="Beyond Assembly Lines" data-ar="أبعد من خطوط التجميع">أبعد من خطوط التجميع</h2>
             <p class="text-center text-slate-400 mb-16 text-lg" data-en="QumraOne can be customized for many computer vision tasks beyond manufacturing." data-ar="يمكن تخصيص QumraOne لمهام رؤية حاسوبية متعددة تتجاوز التصنيع.">يمكن تخصيص QumraOne لمهام رؤية حاسوبية متعددة تتجاوز التصنيع.</p>
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="bg-slate-50 p-8 rounded-[2rem]" data-aos="fade-up" data-aos-delay="0">
@@ -178,7 +188,7 @@
     <!-- Gallery -->
     <section class="py-32 px-6 bg-white">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-5xl font-black mb-4 text-center" data-en="Product Gallery" data-ar="معرض المنتج">معرض المنتج</h2>
+            <h2 class="text-3xl md:text-5xl font-black mb-4 text-center" data-en="Product Gallery" data-ar="معرض المنتج">معرض المنتج</h2>
             <p class="text-center text-slate-400 mb-16" data-en="From design philosophy to real-world deployments." data-ar="من فلسفة التصميم إلى عمليات النشر الواقعية.">من فلسفة التصميم إلى عمليات النشر الواقعية.</p>
 
             <!-- Lightbox -->
@@ -233,7 +243,7 @@
     <!-- CTA -->
     <section class="py-32 px-6 bg-brand text-white text-center">
         <div class="max-w-3xl mx-auto" data-aos="fade-up">
-            <h2 class="text-5xl font-black mb-6" data-en="Ready to Deploy QumraOne?" data-ar="هل أنت مستعد لنشر QumraOne؟">هل أنت مستعد لنشر QumraOne؟</h2>
+            <h2 class="text-3xl md:text-5xl font-black mb-6" data-en="Ready to Deploy QumraOne?" data-ar="هل أنت مستعد لنشر QumraOne؟">هل أنت مستعد لنشر QumraOne؟</h2>
             <p class="text-white/80 text-xl mb-10" data-en="Get in touch and we'll tailor the system to your production line." data-ar="تواصل معنا وسنقوم بتخصيص النظام لخط إنتاجك.">تواصل معنا وسنقوم بتخصيص النظام لخط إنتاجك.</p>
             <a href="index.html#contact" class="inline-block bg-white text-brand font-black px-12 py-4 rounded-2xl hover:opacity-90 transition text-lg" data-en="Contact Us" data-ar="اتصل بنا">اتصل بنا</a>
         </div>
@@ -268,6 +278,10 @@
 
         document.getElementById('btn-en').addEventListener('click', () => setLanguage('en'));
         document.getElementById('btn-ar').addEventListener('click', () => setLanguage('ar'));
+
+        document.getElementById('nav-toggle').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
 
         // Gallery lightbox
         const GALLERY = ['media/slide-02.png','media/slide-03.png','media/slide-08.png','media/slide-04.png','media/slide-05.png','media/slide-06.png','media/slide-07.png','media/slide-09.png'];
