@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="mainHtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VisionWorks | الرؤية الذكية</title>
+    <link rel="icon" href="favicon.jpg" type="image/jpeg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --brand-magenta: #e9528d; }
+        .text-brand { color: var(--brand-magenta); }
+        .bg-brand { background-color: var(--brand-magenta); }
+        html { scroll-behavior: smooth; }
+        [dir="rtl"] { font-family: 'Noto Sans Arabic', sans-serif; }
+        [dir="ltr"] { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-white text-slate-900">
+
+    <!-- Nav -->
+    <nav class="sticky top-0 w-full bg-white/95 backdrop-blur-sm border-b border-slate-100 py-3 px-6 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <img src="logo.jpg" alt="VisionWorks" class="h-16 w-auto">
+                <span class="font-black text-2xl tracking-tighter">Vision<span class="text-brand">Works</span></span>
+            </div>
+            <div class="hidden md:flex gap-8 font-bold text-sm text-slate-600 uppercase tracking-widest items-center">
+                <a href="#about"     data-en="About"     data-ar="عن الشركة"  class="hover:text-brand transition">عن الشركة</a>
+                <a href="#services"  data-en="Services"  data-ar="خدماتنا"    class="hover:text-brand transition">خدماتنا</a>
+                <a href="#products"  data-en="Products"  data-ar="منتجاتنا"   class="hover:text-brand transition">منتجاتنا</a>
+                <a href="#portfolio" data-en="Portfolio" data-ar="أعمالنا"    class="hover:text-brand transition">أعمالنا</a>
+                <a href="#contact"   data-en="Contact"   data-ar="اتصل بنا"   class="hover:text-brand transition">اتصل بنا</a>
+            </div>
+            <div class="flex bg-gray-100 p-1 rounded-xl">
+                <button id="btn-en" class="text-gray-400 px-4 py-1.5 rounded-lg text-sm font-bold hover:text-slate-900 transition">EN</button>
+                <button id="btn-ar" class="bg-brand text-white px-4 py-1.5 rounded-lg text-sm font-bold shadow transition">AR</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="py-32 px-6 bg-slate-950 text-white text-center">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-6xl font-black mb-6" data-en="Smart Vision for Industry" data-ar="الرؤية الذكية للصناعة">الرؤية الذكية للصناعة</h1>
+            <p class="text-slate-400 text-xl max-w-2xl mx-auto" data-en="AI-powered automation, computer vision, and hardware integration for modern manufacturing." data-ar="أتمتة مدعومة بالذكاء الاصطناعي، رؤية حاسوبية، وتكامل الأجهزة للتصنيع الحديث.">أتمتة مدعومة بالذكاء الاصطناعي، رؤية حاسوبية، وتكامل الأجهزة للتصنيع الحديث.</p>
+            <a href="#contact" class="inline-block mt-10 bg-brand text-white font-bold px-10 py-4 rounded-2xl hover:opacity-90 transition" data-en="Get in Touch" data-ar="تواصل معنا">تواصل معنا</a>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-3 gap-16">
+            <div class="text-center" data-aos="fade-up" data-aos-delay="0">
+                <div id="stat-roi" class="text-brand text-8xl font-black mb-4">0%</div>
+                <p class="text-slate-400 font-bold uppercase tracking-[0.2em] text-sm" data-en="ROI Growth" data-ar="عائد الاستثمار">عائد الاستثمار</p>
+            </div>
+            <div class="text-center border-x border-slate-100 px-4" data-aos="fade-up" data-aos-delay="150">
+                <div id="stat-sensors" class="text-slate-900 text-8xl font-black mb-4">0</div>
+                <p class="text-slate-400 font-bold uppercase tracking-[0.2em] text-sm" data-en="Active Sensors" data-ar="مستشعر نشط">مستشعر نشط</p>
+            </div>
+            <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+                <div id="stat-hours" class="text-slate-900 text-8xl font-black mb-4">0</div>
+                <p class="text-slate-400 font-bold uppercase tracking-[0.2em] text-sm" data-en="Work Hours" data-ar="ساعة عمل">ساعة عمل</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="py-32 px-6 bg-slate-50">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+            <div data-aos="fade-right">
+                <img src="logo-eye.jpg" alt="VisionWorks" class="rounded-[2.5rem] w-full object-cover shadow-xl">
+            </div>
+            <div data-aos="fade-left">
+                <h2 class="text-5xl font-black mb-8" data-en="Who We Are" data-ar="من نحن">من نحن</h2>
+                <p class="text-slate-500 text-lg leading-relaxed mb-6" data-en="VisionWorks is a technology company specializing in AI-powered vision systems, industrial automation, and smart hardware solutions. We bridge the gap between cutting-edge AI research and real-world manufacturing environments." data-ar="فيجن وركس شركة تقنية متخصصة في أنظمة الرؤية المدعومة بالذكاء الاصطناعي، والأتمتة الصناعية، وحلول الأجهزة الذكية. نجسّر الفجوة بين أحدث أبحاث الذكاء الاصطناعي وبيئات التصنيع الواقعية.">فيجن وركس شركة تقنية متخصصة في أنظمة الرؤية المدعومة بالذكاء الاصطناعي، والأتمتة الصناعية، وحلول الأجهزة الذكية. نجسّر الفجوة بين أحدث أبحاث الذكاء الاصطناعي وبيئات التصنيع الواقعية.</p>
+                <p class="text-slate-500 text-lg leading-relaxed" data-en="Our multidisciplinary team combines expertise in computer vision, embedded systems, and process automation to deliver measurable results." data-ar="يجمع فريقنا متعدد التخصصات بين الخبرة في الرؤية الحاسوبية والأنظمة المدمجة وأتمتة العمليات لتحقيق نتائج قابلة للقياس.">يجمع فريقنا متعدد التخصصات بين الخبرة في الرؤية الحاسوبية والأنظمة المدمجة وأتمتة العمليات لتحقيق نتائج قابلة للقياس.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-5xl font-black mb-20 text-center" data-en="Technical Ecosystem" data-ar="المنظومة التقنية">المنظومة التقنية</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-slate-50 p-10 rounded-[2.5rem] border-b-8 border-brand" data-aos="fade-up" data-aos-delay="0">
+                    <h3 class="font-black text-2xl mb-4" data-en="AI & Vision" data-ar="الذكاء الاصطناعي">الذكاء الاصطناعي</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed" data-en="Defect detection, facial recognition, and smart employee management." data-ar="اكتشاف العيوب، التعرف على الوجوه، وإدارة الموظفين الذكية.">اكتشاف العيوب، التعرف على الوجوه، وإدارة الموظفين الذكية.</p>
+                </div>
+                <div class="bg-slate-50 p-10 rounded-[2.5rem] border-b-8 border-brand" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="font-black text-2xl mb-4" data-en="Automation" data-ar="الأتمتة">الأتمتة</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed" data-en="PLC logic, conveyor systems, and custom 3D printing." data-ar="منطق PLC، أنظمة أحزمة النقل، والطباعة ثلاثية الأبعاد.">منطق PLC، أنظمة أحزمة النقل، والطباعة ثلاثية الأبعاد.</p>
+                </div>
+                <div class="bg-slate-50 p-10 rounded-[2.5rem] border-b-8 border-brand" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="font-black text-2xl mb-4" data-en="Integration" data-ar="تكامل الأنظمة">تكامل الأنظمة</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed" data-en="Bluetooth extensions, driver integration, and torque detection." data-ar="توسعة البلوتوث، تكامل برامج التشغيل، وقياس العزم.">توسعة البلوتوث، تكامل برامج التشغيل، وقياس العزم.</p>
+                </div>
+                <div class="bg-slate-50 p-10 rounded-[2.5rem] border-b-8 border-brand" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="font-black text-2xl mb-4" data-en="Hardware" data-ar="الأجهزة">الأجهزة</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed" data-en="Real-time monitoring, high-accuracy sensors, and power management." data-ar="مراقبة لحظية، حساسات عالية الدقة، وإدارة الطاقة.">مراقبة لحظية، حساسات عالية الدقة، وإدارة الطاقة.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section id="products" class="py-32 bg-slate-950 text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-5xl font-black mb-20 text-center" data-en="Our Products" data-ar="منتجاتنا">منتجاتنا</h2>
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div data-aos="fade-right">
+                    <video autoplay muted loop playsinline class="w-full rounded-[2.5rem] shadow-2xl">
+                        <source src="QumraOne_W4.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div data-aos="fade-left">
+                    <span class="text-brand font-bold uppercase tracking-widest text-sm" data-en="Flagship Product" data-ar="المنتج الرئيسي">المنتج الرئيسي</span>
+                    <h3 class="text-5xl font-black mt-4 mb-6">QumraOne</h3>
+                    <p class="text-slate-400 text-lg leading-relaxed mb-8" data-en="A next-generation industrial vision system combining AI-powered defect detection with real-time analytics. QumraOne delivers unmatched accuracy on the production line with a compact, ruggedized form factor." data-ar="نظام رؤية صناعي من الجيل التالي يجمع بين كشف العيوب بالذكاء الاصطناعي والتحليلات الفورية. يوفر QumraOne دقة لا مثيل لها على خط الإنتاج بتصميم مدمج ومتين.">نظام رؤية صناعي من الجيل التالي يجمع بين كشف العيوب بالذكاء الاصطناعي والتحليلات الفورية. يوفر QumraOne دقة لا مثيل لها على خط الإنتاج بتصميم مدمج ومتين.</p>
+                    <ul class="space-y-3 text-slate-300 text-sm">
+                        <li class="flex items-center gap-3"><span class="text-brand font-black">&#10003;</span> <span data-en="Real-time defect detection" data-ar="كشف العيوب في الوقت الفعلي">كشف العيوب في الوقت الفعلي</span></li>
+                        <li class="flex items-center gap-3"><span class="text-brand font-black">&#10003;</span> <span data-en="Edge AI processing" data-ar="معالجة الذكاء الاصطناعي على الحافة">معالجة الذكاء الاصطناعي على الحافة</span></li>
+                        <li class="flex items-center gap-3"><span class="text-brand font-black">&#10003;</span> <span data-en="Industrial-grade hardware" data-ar="أجهزة بمواصفات صناعية">أجهزة بمواصفات صناعية</span></li>
+                        <li class="flex items-center gap-3"><span class="text-brand font-black">&#10003;</span> <span data-en="Seamless ERP integration" data-ar="تكامل سلس مع أنظمة ERP">تكامل سلس مع أنظمة ERP</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section id="portfolio" class="py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-5xl font-black mb-4 text-center" data-en="Our Work" data-ar="أعمالنا">أعمالنا</h2>
+            <p class="text-center text-slate-400 mb-20" data-en="Case studies from real deployments." data-ar="دراسات حالة من عمليات نشر حقيقية.">دراسات حالة من عمليات نشر حقيقية.</p>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-slate-50 rounded-[2rem] overflow-hidden" data-aos="fade-up" data-aos-delay="0">
+                    <div class="bg-slate-200 h-48 flex items-center justify-center">
+                        <span class="text-slate-400 font-bold uppercase tracking-widest text-xs" data-en="Manufacturing" data-ar="التصنيع">التصنيع</span>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="font-black text-xl mb-3" data-en="Automotive Defect Detection" data-ar="كشف عيوب السيارات">كشف عيوب السيارات</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed" data-en="Deployed a vision inspection system reducing defect escape rate by 94% on a high-speed assembly line." data-ar="نشر نظام فحص بصري أدى إلى تقليل معدل هروب العيوب بنسبة 94% على خط تجميع عالي السرعة.">نشر نظام فحص بصري أدى إلى تقليل معدل هروب العيوب بنسبة 94% على خط تجميع عالي السرعة.</p>
+                    </div>
+                </div>
+                <div class="bg-slate-50 rounded-[2rem] overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-slate-200 h-48 flex items-center justify-center">
+                        <span class="text-slate-400 font-bold uppercase tracking-widest text-xs" data-en="Logistics" data-ar="اللوجستيات">اللوجستيات</span>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="font-black text-xl mb-3" data-en="Smart Warehouse Automation" data-ar="أتمتة المستودعات الذكية">أتمتة المستودعات الذكية</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed" data-en="Integrated conveyor control and vision sorting system processing 2,400 items/hour with 99.7% accuracy." data-ar="دمج نظام التحكم في الناقل وفرز الرؤية لمعالجة 2400 عنصر/ساعة بدقة 99.7%.">دمج نظام التحكم في الناقل وفرز الرؤية لمعالجة 2400 عنصر/ساعة بدقة 99.7%.</p>
+                    </div>
+                </div>
+                <div class="bg-slate-50 rounded-[2rem] overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-slate-200 h-48 flex items-center justify-center">
+                        <span class="text-slate-400 font-bold uppercase tracking-widest text-xs" data-en="Energy" data-ar="الطاقة">الطاقة</span>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="font-black text-xl mb-3" data-en="Power Grid Monitoring" data-ar="مراقبة شبكة الطاقة">مراقبة شبكة الطاقة</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed" data-en="Deployed sensor arrays and edge AI for predictive maintenance, cutting unplanned downtime by 67%." data-ar="نشر مصفوفات الاستشعار والذكاء الاصطناعي للصيانة التنبؤية، مما قلل وقت التوقف غير المخطط بنسبة 67%.">نشر مصفوفات الاستشعار والذكاء الاصطناعي للصيانة التنبؤية، مما قلل وقت التوقف غير المخطط بنسبة 67%.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <footer id="contact" class="bg-slate-950 text-white py-32 px-6">
+        <div class="max-w-2xl mx-auto text-center">
+            <img src="logo.jpg" alt="Logo" class="h-40 mx-auto mb-12 rounded-2xl">
+            <h2 class="text-5xl font-black mb-4" data-en="Get in Touch" data-ar="تواصل معنا">تواصل معنا</h2>
+            <p class="text-slate-400 mb-12" data-en="Ready to bring AI-powered vision to your production line?" data-ar="هل أنت مستعد لإدخال الرؤية المدعومة بالذكاء الاصطناعي إلى خط إنتاجك؟">هل أنت مستعد لإدخال الرؤية المدعومة بالذكاء الاصطناعي إلى خط إنتاجك؟</p>
+
+            <form id="contact-form" class="space-y-4 text-right">
+                <input type="text" name="name" required
+                    placeholder-ar="الاسم" placeholder-en="Name"
+                    placeholder="الاسم"
+                    class="w-full bg-slate-800 text-white placeholder-slate-500 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand">
+                <input type="email" name="email" required
+                    placeholder-ar="البريد الإلكتروني" placeholder-en="Email"
+                    placeholder="البريد الإلكتروني"
+                    class="w-full bg-slate-800 text-white placeholder-slate-500 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand">
+                <textarea name="message" rows="5" required
+                    placeholder-ar="رسالتك" placeholder-en="Message"
+                    placeholder="رسالتك"
+                    class="w-full bg-slate-800 text-white placeholder-slate-500 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand resize-none"></textarea>
+                <button type="submit" id="form-submit-btn"
+                    data-en="Send Message" data-ar="إرسال الرسالة"
+                    class="w-full bg-brand text-white font-bold py-4 rounded-2xl hover:opacity-90 transition">إرسال الرسالة</button>
+            </form>
+
+            <div id="contact-success" class="hidden py-16">
+                <div class="text-brand text-7xl mb-6">&#10003;</div>
+                <h3 class="text-3xl font-black mb-3" data-en="Message Sent!" data-ar="تم الإرسال!">تم الإرسال!</h3>
+                <p class="text-slate-400" data-en="We'll get back to you soon." data-ar="سنتواصل معك قريباً.">سنتواصل معك قريباً.</p>
+            </div>
+
+            <p class="mt-10 text-slate-600 text-sm">
+                <a href="privacy.html" class="hover:text-white transition" data-en="Privacy Policy" data-ar="سياسة الخصوصية">سياسة الخصوصية</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.8.0/countUp.umd.min.js"></script>
+    <script>
+        AOS.init({ duration: 700, once: true, easing: 'ease-out-quad' });
+
+        const statsSection = document.querySelector('.grid.md\\:grid-cols-3');
+        const counters = [
+            { id: 'stat-roi',     end: 23,  suffix: '%'  },
+            { id: 'stat-sensors', end: 235, suffix: ''   },
+            { id: 'stat-hours',   end: 42,  suffix: 'k+' },
+        ];
+        let countersStarted = false;
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && !countersStarted) {
+                countersStarted = true;
+                counters.forEach(({ id, end, suffix }) => {
+                    new countUp.CountUp(id, end, { suffix, duration: 2.5, useEasing: true }).start();
+                });
+            }
+        }, { threshold: 0.3 });
+
+        statsObserver.observe(statsSection);
+
+        function setLanguage(lang) {
+            const html = document.getElementById('mainHtml');
+            const elements = document.querySelectorAll('[data-en]');
+            const btnEn = document.getElementById('btn-en');
+            const btnAr = document.getElementById('btn-ar');
+            const isEn = lang === 'en';
+            html.dir  = isEn ? 'ltr' : 'rtl';
+            html.lang = lang;
+            btnEn.classList.toggle('bg-brand',      isEn);
+            btnEn.classList.toggle('text-white',    isEn);
+            btnEn.classList.toggle('text-gray-400', !isEn);
+            btnAr.classList.toggle('bg-brand',      !isEn);
+            btnAr.classList.toggle('text-white',    !isEn);
+            btnAr.classList.toggle('text-gray-400', isEn);
+            elements.forEach(el => {
+                el.textContent = el.getAttribute(isEn ? 'data-en' : 'data-ar');
+            });
+            document.querySelectorAll('[placeholder-en]').forEach(el => {
+                el.placeholder = el.getAttribute(isEn ? 'placeholder-en' : 'placeholder-ar');
+            });
+        }
+
+        document.getElementById('btn-en').addEventListener('click', () => setLanguage('en'));
+        document.getElementById('btn-ar').addEventListener('click', () => setLanguage('ar'));
+
+        document.getElementById('contact-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('form-submit-btn');
+            const isEn = document.getElementById('mainHtml').lang === 'en';
+            btn.disabled = true;
+            btn.textContent = isEn ? 'Sending…' : 'جارٍ الإرسال…';
+
+            const data = new FormData(this);
+            try {
+                const res = await fetch('https://formsubmit.co/ajax/yuji_elfahkrany@outlook.com', {
+                    method: 'POST',
+                    headers: { 'Accept': 'application/json' },
+                    body: data
+                });
+                if (res.ok) {
+                    document.getElementById('contact-form').classList.add('hidden');
+                    document.getElementById('contact-success').classList.remove('hidden');
+                } else {
+                    throw new Error();
+                }
+            } catch {
+                btn.disabled = false;
+                btn.textContent = isEn ? 'Send Message' : 'إرسال الرسالة';
+                alert(isEn ? 'Something went wrong. Please try again.' : 'حدث خطأ. يرجى المحاولة مرة أخرى.');
+            }
+        });
+    </script>
+</body>
+</html>
