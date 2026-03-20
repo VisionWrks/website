@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="mainHtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QumraOne | VisionWorks</title>
+    <link rel="icon" href="media/favicon.png" type="image/png">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R1SB205C47"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-R1SB205C47');</script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --brand-magenta: #e9528d; }
+        .text-brand { color: var(--brand-magenta); }
+        .bg-brand { background-color: var(--brand-magenta); }
+        html { scroll-behavior: smooth; }
+        [dir="rtl"] { font-family: 'Noto Sans Arabic', sans-serif; }
+        [dir="ltr"] { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-white text-slate-900">
+
+    <!-- Nav -->
+    <nav class="sticky top-0 w-full bg-white/95 backdrop-blur-sm border-b border-slate-100 py-3 px-6 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-4">
+                <img src="media/favicon.png" alt="VisionWorks" class="h-16 w-auto">
+                <span class="font-black text-2xl tracking-tighter">Vision<span class="text-brand">Works</span></span>
+            </a>
+            <div class="flex items-center gap-6">
+                <a href="index.html#contact" class="hidden md:block font-bold text-sm text-slate-600 hover:text-brand transition uppercase tracking-widest" data-en="Contact" data-ar="اتصل بنا">اتصل بنا</a>
+                <div class="flex bg-gray-100 p-1 rounded-xl">
+                    <button id="btn-en" class="text-gray-400 px-4 py-1.5 rounded-lg text-sm font-bold hover:text-slate-900 transition">EN</button>
+                    <button id="btn-ar" class="bg-brand text-white px-4 py-1.5 rounded-lg text-sm font-bold shadow transition">AR</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="bg-slate-950 text-white py-32 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+            <div data-aos="fade-right">
+                <span class="text-brand font-bold uppercase tracking-widest text-sm" data-en="Flagship Product" data-ar="المنتج الرئيسي">المنتج الرئيسي</span>
+                <h1 class="text-7xl font-black mt-4 mb-6">QumraOne</h1>
+                <p class="text-slate-400 text-xl leading-relaxed mb-10" data-en="A visual inspection system built with the customer in mind and quality first — a system that just works without having to think about it twice." data-ar="نظام فحص بصري مبني بأولوية العميل والجودة أولاً — نظام يعمل ببساطة دون الحاجة إلى التفكير مرتين.">نظام فحص بصري مبني بأولوية العميل والجودة أولاً — نظام يعمل ببساطة دون الحاجة إلى التفكير مرتين.</p>
+                <a href="index.html#contact" class="inline-block bg-brand text-white font-bold px-10 py-4 rounded-2xl hover:opacity-90 transition" data-en="Request a Demo" data-ar="طلب عرض تجريبي">طلب عرض تجريبي</a>
+            </div>
+            <div data-aos="fade-left">
+                <video autoplay muted loop playsinline class="w-full rounded-[2.5rem] shadow-2xl">
+                    <source src="media/QumraOne_W4.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overview -->
+    <section class="py-24 px-6 bg-white">
+        <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
+            <h2 class="text-4xl font-black mb-6" data-en="What is QumraOne?" data-ar="ما هو QumraOne؟">ما هو QumraOne؟</h2>
+            <p class="text-slate-500 text-xl leading-relaxed" data-en="QumraOne is a visual inspection system that integrates with screwdrivers to create a fully failure-proof inspection system for assembly lines. It can also be customized to the specific needs of each customer." data-ar="QumraOne هو نظام فحص بصري يتكامل مع المفكات لإنشاء نظام فحص كامل مضمون الأداء لخطوط التجميع. يمكن أيضاً تخصيصه ليناسب الاحتياجات المحددة لكل عميل.">QumraOne هو نظام فحص بصري يتكامل مع المفكات لإنشاء نظام فحص كامل مضمون الأداء لخطوط التجميع. يمكن أيضاً تخصيصه ليناسب الاحتياجات المحددة لكل عميل.</p>
+        </div>
+    </section>
+
+    <!-- Demo Videos -->
+    <section class="py-24 px-6 bg-slate-950 text-white">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-5xl font-black mb-4 text-center" data-en="See It in Action" data-ar="شاهده في العمل">شاهده في العمل</h2>
+            <p class="text-center text-slate-400 mb-16" data-en="Live demos from real deployments." data-ar="عروض مباشرة من عمليات نشر حقيقية.">عروض مباشرة من عمليات نشر حقيقية.</p>
+            <div class="grid md:grid-cols-3 gap-8" id="video-grid">
+                <div data-aos="fade-up" data-aos-delay="0">
+                    <div class="aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black">
+                        <video controls playsinline class="w-full h-full object-contain">
+                            <source src="media/demo-01.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <p class="text-slate-400 text-sm text-center mt-3" data-en="KPI monitoring" data-ar="مراقبة مؤشرات الأداء">مراقبة مؤشرات الأداء</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="100">
+                    <div class="aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black">
+                        <video controls playsinline class="w-full h-full object-contain">
+                            <source src="media/demo-04.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <p class="text-slate-400 text-sm text-center mt-3" data-en="Cleco driver integration" data-ar="تكامل مفك Cleco">تكامل مفك Cleco</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <div class="aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black">
+                        <video controls playsinline class="w-full h-full object-contain">
+                            <source src="media/QumraOne_W4.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <p class="text-slate-400 text-sm text-center mt-3" data-en="Jeep W4 production line" data-ar="خط إنتاج Jeep W4">خط إنتاج Jeep W4</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Features -->
+    <section class="py-24 px-6 bg-slate-50">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-5xl font-black mb-16 text-center" data-en="Core Features" data-ar="الميزات الأساسية">الميزات الأساسية</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-8 rounded-[2rem] shadow-sm border-b-4 border-brand" data-aos="fade-up" data-aos-delay="0">
+                    <div class="text-brand text-4xl mb-4">&#9654;</div>
+                    <h3 class="font-black text-lg mb-2" data-en="Realtime Inspection" data-ar="فحص في الوقت الفعلي">فحص في الوقت الفعلي</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed" data-en="Live visual inspection on the assembly line with instant results." data-ar="فحص بصري مباشر على خط التجميع مع نتائج فورية.">فحص بصري مباشر على خط التجميع مع نتائج فورية.</p>
+                </div>
+                <div class="bg-white p-8 rounded-[2rem] shadow-sm border-b-4 border-brand" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-brand text-4xl mb-4">&#128246;</div>
+                    <h3 class="font-black text-lg mb-2" data-en="Offline & Online" data-ar="يعمل دون إنترنت وبه">يعمل دون إنترنت وبه</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed" data-en="Works fully offline as well as online — no dependency on connectivity." data-ar="يعمل بالكامل دون اتصال بالإنترنت أو معه — لا يعتمد على الاتصال.">يعمل بالكامل دون اتصال بالإنترنت أو معه — لا يعتمد على الاتصال.</p>
+                </div>
+                <div class="bg-white p-8 rounded-[2rem] shadow-sm border-b-4 border-brand" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-brand text-4xl mb-4">&#128276;</div>
+                    <h3 class="font-black text-lg mb-2" data-en="Sound Alerts" data-ar="تنبيهات صوتية">تنبيهات صوتية</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed" data-en="Supports sound alerts and multiple languages for operator feedback." data-ar="يدعم التنبيهات الصوتية ولغات متعددة لتغذية راجعة للمشغل.">يدعم التنبيهات الصوتية ولغات متعددة لتغذية راجعة للمشغل.</p>
+                </div>
+                <div class="bg-white p-8 rounded-[2rem] shadow-sm border-b-4 border-brand" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-brand text-4xl mb-4">&#128247;</div>
+                    <h3 class="font-black text-lg mb-2" data-en="Multi-Camera Support" data-ar="دعم متعدد الكاميرات">دعم متعدد الكاميرات</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed" data-en="Multi-view sensor supporting multiple cameras for wider situational understanding." data-ar="حساس متعدد المشاهد يدعم كاميرات متعددة لفهم أشمل للموقف.">حساس متعدد المشاهد يدعم كاميرات متعددة لفهم أشمل للموقف.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screwdriver Integration -->
+    <section class="py-32 px-6 bg-slate-950 text-white">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+            <div data-aos="fade-right">
+                <span class="text-brand font-bold uppercase tracking-widest text-sm" data-en="Hardware Integration" data-ar="تكامل الأجهزة">تكامل الأجهزة</span>
+                <h2 class="text-5xl font-black mt-4 mb-6" data-en="Screwdriver Integration" data-ar="تكامل المفكات">تكامل المفكات</h2>
+                <p class="text-slate-400 text-lg leading-relaxed mb-8" data-en="QumraOne connects with wireless screwdrivers over a secure BLE channel, enabling real-time torque verification alongside visual inspection — all without opening or modifying the driver." data-ar="يتصل QumraOne بالمفكات اللاسلكية عبر قناة BLE آمنة، مما يتيح التحقق الفوري من العزم جنباً إلى جنب مع الفحص البصري — دون الحاجة لفتح المفك أو تعديله.">يتصل QumraOne بالمفكات اللاسلكية عبر قناة BLE آمنة، مما يتيح التحقق الفوري من العزم جنباً إلى جنب مع الفحص البصري — دون الحاجة لفتح المفك أو تعديله.</p>
+                <ul class="space-y-4 text-slate-300 text-sm">
+                    <li class="flex items-start gap-3"><span class="text-brand font-black mt-0.5">&#10003;</span><span data-en="Integration via QR code — quick and non-invasive setup" data-ar="التكامل عبر رمز QR — إعداد سريع وغير تدخلي">التكامل عبر رمز QR — إعداد سريع وغير تدخلي</span></li>
+                    <li class="flex items-start gap-3"><span class="text-brand font-black mt-0.5">&#10003;</span><span data-en="BLE integration for live torque measurement" data-ar="تكامل BLE لقياس العزم الحي">تكامل BLE لقياس العزم الحي</span></li>
+                    <li class="flex items-start gap-3"><span class="text-brand font-black mt-0.5">&#10003;</span><span data-en="Realtime detection of torque status LED and errors" data-ar="كشف فوري لمؤشر حالة العزم والأخطاء">كشف فوري لمؤشر حالة العزم والأخطاء</span></li>
+                    <li class="flex items-start gap-3"><span class="text-brand font-black mt-0.5">&#10003;</span><span data-en="Screw count tracking of correctly tightened screws" data-ar="تتبع عدد البراغي المشدودة بشكل صحيح">تتبع عدد البراغي المشدودة بشكل صحيح</span></li>
+                    <li class="flex items-start gap-3"><span class="text-brand font-black mt-0.5">&#10003;</span><span data-en="No hardware modification required" data-ar="لا يتطلب أي تعديل على الأجهزة">لا يتطلب أي تعديل على الأجهزة</span></li>
+                </ul>
+            </div>
+            <div data-aos="fade-left" class="bg-slate-800 rounded-[2.5rem] p-8 text-center">
+                <p class="text-slate-400 text-sm mb-4 uppercase tracking-widest font-bold" data-en="Compatible With" data-ar="متوافق مع">متوافق مع</p>
+                <img src="media/logo-cleco.svg" alt="Cleco" class="h-10 w-auto mx-auto mb-3 invert">
+                <p class="text-slate-400 text-sm" data-en="Wireless Screwdrivers" data-ar="مفكات لاسلكية">مفكات لاسلكية</p>
+                <div class="mt-8 border-t border-slate-700 pt-8">
+                    <p class="text-slate-400 text-sm leading-relaxed" data-en="Stable wireless connection over secure BLE channel with no latency on the production line." data-ar="اتصال لاسلكي مستقر عبر قناة BLE آمنة دون أي تأخير على خط الإنتاج.">اتصال لاسلكي مستقر عبر قناة BLE آمنة دون أي تأخير على خط الإنتاج.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="py-32 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-5xl font-black mb-6 text-center" data-en="Beyond Assembly Lines" data-ar="أبعد من خطوط التجميع">أبعد من خطوط التجميع</h2>
+            <p class="text-center text-slate-400 mb-16 text-lg" data-en="QumraOne can be customized for many computer vision tasks beyond manufacturing." data-ar="يمكن تخصيص QumraOne لمهام رؤية حاسوبية متعددة تتجاوز التصنيع.">يمكن تخصيص QumraOne لمهام رؤية حاسوبية متعددة تتجاوز التصنيع.</p>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-slate-50 p-8 rounded-[2rem]" data-aos="fade-up" data-aos-delay="0">
+                    <h3 class="font-black text-xl mb-3" data-en="Assembly Inspection" data-ar="فحص التجميع">فحص التجميع</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed" data-en="Full failure-proof inspection for manufacturing assembly lines with human-in-the-loop quality control." data-ar="فحص مضمون الأداء بالكامل لخطوط تجميع التصنيع مع مراقبة الجودة بمشاركة المشغل.">فحص مضمون الأداء بالكامل لخطوط تجميع التصنيع مع مراقبة الجودة بمشاركة المشغل.</p>
+                </div>
+                <div class="bg-slate-50 p-8 rounded-[2rem]" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="font-black text-xl mb-3" data-en="Pose Estimation & Counting" data-ar="تقدير الوضعية والعد">تقدير الوضعية والعد</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed" data-en="Detect operator poses and count items or people in a given area with high accuracy." data-ar="كشف وضعيات المشغلين وعد العناصر أو الأشخاص في منطقة معينة بدقة عالية.">كشف وضعيات المشغلين وعد العناصر أو الأشخاص في منطقة معينة بدقة عالية.</p>
+                </div>
+                <div class="bg-slate-50 p-8 rounded-[2rem]" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="font-black text-xl mb-3" data-en="Crowd Detection" data-ar="كشف الازدحام">كشف الازدحام</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed" data-en="Monitor crowdedness in reception areas, warehouses, or production floors in real time." data-ar="مراقبة الازدحام في مناطق الاستقبال أو المستودعات أو قاعات الإنتاج في الوقت الفعلي.">مراقبة الازدحام في مناطق الاستقبال أو المستودعات أو قاعات الإنتاج في الوقت الفعلي.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="py-32 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-5xl font-black mb-4 text-center" data-en="Product Gallery" data-ar="معرض المنتج">معرض المنتج</h2>
+            <p class="text-center text-slate-400 mb-16" data-en="From design philosophy to real-world deployments." data-ar="من فلسفة التصميم إلى عمليات النشر الواقعية.">من فلسفة التصميم إلى عمليات النشر الواقعية.</p>
+
+            <!-- Lightbox -->
+            <div id="lightbox" class="hidden fixed inset-0 bg-black/95 z-50 flex flex-col items-center justify-center" onclick="handleLightboxClick(event)">
+                <div class="relative flex items-center justify-center w-full h-full p-12">
+                    <!-- Prev -->
+                    <button onclick="event.stopPropagation(); navLightbox(-1)" class="absolute left-4 text-white bg-white/10 hover:bg-brand rounded-full w-12 h-12 flex items-center justify-center text-2xl transition z-10">&#8249;</button>
+                    <!-- Image -->
+                    <div id="lightbox-img-wrap" class="flex items-center justify-center overflow-auto cursor-zoom-in" style="width:90vw;height:85vh" onclick="event.stopPropagation(); toggleZoom()">
+                        <img id="lightbox-img" src="" class="rounded-xl shadow-2xl transition-transform duration-300 select-none" style="width:100%;height:100%;object-fit:contain;transform-origin:center center;">
+                    </div>
+                    <!-- Next -->
+                    <button onclick="event.stopPropagation(); navLightbox(1)" class="absolute right-4 text-white bg-white/10 hover:bg-brand rounded-full w-12 h-12 flex items-center justify-center text-2xl transition z-10">&#8250;</button>
+                </div>
+                <!-- Counter + close -->
+                <div class="absolute top-5 w-full flex justify-between items-center px-6">
+                    <span id="lightbox-counter" class="text-white/60 text-sm font-bold"></span>
+                    <button onclick="event.stopPropagation(); closeLightbox()" class="text-white text-3xl leading-none hover:text-brand transition">&times;</button>
+                </div>
+                <p class="absolute bottom-5 text-white/40 text-xs" data-en="Click image to zoom · ESC to close" data-ar="انقر على الصورة للتكبير · ESC للإغلاق">انقر على الصورة للتكبير · ESC للإغلاق</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="col-span-2 cursor-pointer overflow-hidden rounded-2xl h-44" data-aos="fade-up" data-aos-delay="0" onclick="openLightbox(0)">
+                    <img src="media/slide-02.png" alt="Introduction" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="cursor-pointer overflow-hidden rounded-2xl h-44" data-aos="fade-up" data-aos-delay="50" onclick="openLightbox(1)">
+                    <img src="media/slide-03.png" alt="Product Categories" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="cursor-pointer overflow-hidden rounded-2xl h-44" data-aos="fade-up" data-aos-delay="100" onclick="openLightbox(2)">
+                    <img src="media/slide-08.png" alt="Multi-view" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="cursor-pointer overflow-hidden rounded-2xl h-44" data-aos="fade-up" data-aos-delay="0" onclick="openLightbox(3)">
+                    <img src="media/slide-04.png" alt="Design Philosophy" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="cursor-pointer overflow-hidden rounded-2xl h-44" data-aos="fade-up" data-aos-delay="50" onclick="openLightbox(4)">
+                    <img src="media/slide-05.png" alt="Screwdriver Integration" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="col-span-2 cursor-pointer overflow-hidden rounded-2xl h-44" data-aos="fade-up" data-aos-delay="100" onclick="openLightbox(5)">
+                    <img src="media/slide-06.png" alt="Applications" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="col-span-2 cursor-pointer overflow-hidden rounded-2xl h-44" data-aos="fade-up" data-aos-delay="0" onclick="openLightbox(6)">
+                    <img src="media/slide-07.png" alt="Reality Check" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="col-span-2 cursor-pointer overflow-hidden rounded-2xl h-44" data-aos="fade-up" data-aos-delay="100" onclick="openLightbox(7)">
+                    <img src="media/slide-09.png" alt="Cleco Demo" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-32 px-6 bg-brand text-white text-center">
+        <div class="max-w-3xl mx-auto" data-aos="fade-up">
+            <h2 class="text-5xl font-black mb-6" data-en="Ready to Deploy QumraOne?" data-ar="هل أنت مستعد لنشر QumraOne؟">هل أنت مستعد لنشر QumraOne؟</h2>
+            <p class="text-white/80 text-xl mb-10" data-en="Get in touch and we'll tailor the system to your production line." data-ar="تواصل معنا وسنقوم بتخصيص النظام لخط إنتاجك.">تواصل معنا وسنقوم بتخصيص النظام لخط إنتاجك.</p>
+            <a href="index.html#contact" class="inline-block bg-white text-brand font-black px-12 py-4 rounded-2xl hover:opacity-90 transition text-lg" data-en="Contact Us" data-ar="اتصل بنا">اتصل بنا</a>
+        </div>
+    </section>
+
+    <footer class="bg-slate-950 text-slate-400 py-8 text-center text-sm">
+        <p>&copy; 2026 VisionWorks. <a href="index.html" class="hover:text-white transition" data-en="Back to Home" data-ar="العودة للرئيسية">العودة للرئيسية</a> · <a href="privacy.html" class="hover:text-white transition" data-en="Privacy Policy" data-ar="سياسة الخصوصية">سياسة الخصوصية</a></p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 700, once: true, easing: 'ease-out-quad' });
+
+        function setLanguage(lang) {
+            const html = document.getElementById('mainHtml');
+            const elements = document.querySelectorAll('[data-en]');
+            const btnEn = document.getElementById('btn-en');
+            const btnAr = document.getElementById('btn-ar');
+            const isEn = lang === 'en';
+            html.dir  = isEn ? 'ltr' : 'rtl';
+            html.lang = lang;
+            btnEn.classList.toggle('bg-brand',      isEn);
+            btnEn.classList.toggle('text-white',    isEn);
+            btnEn.classList.toggle('text-gray-400', !isEn);
+            btnAr.classList.toggle('bg-brand',      !isEn);
+            btnAr.classList.toggle('text-white',    !isEn);
+            btnAr.classList.toggle('text-gray-400', isEn);
+            elements.forEach(el => {
+                el.textContent = el.getAttribute(isEn ? 'data-en' : 'data-ar');
+            });
+        }
+
+        document.getElementById('btn-en').addEventListener('click', () => setLanguage('en'));
+        document.getElementById('btn-ar').addEventListener('click', () => setLanguage('ar'));
+
+        // Gallery lightbox
+        const GALLERY = ['media/slide-02.png','media/slide-03.png','media/slide-08.png','media/slide-04.png','media/slide-05.png','media/slide-06.png','media/slide-07.png','media/slide-09.png'];
+        let currentIdx = 0, zoomed = false;
+
+        function openLightbox(i) {
+            currentIdx = i;
+            zoomed = false;
+            const img = document.getElementById('lightbox-img');
+            img.style.transform = 'scale(1)';
+            img.src = GALLERY[currentIdx];
+            document.getElementById('lightbox-counter').textContent = (currentIdx + 1) + ' / ' + GALLERY.length;
+            document.getElementById('lightbox').classList.remove('hidden');
+            document.getElementById('lightbox-img-wrap').className = document.getElementById('lightbox-img-wrap').className.replace('cursor-zoom-out','cursor-zoom-in');
+        }
+        function navLightbox(dir) {
+            currentIdx = (currentIdx + dir + GALLERY.length) % GALLERY.length;
+            zoomed = false;
+            const img = document.getElementById('lightbox-img');
+            img.style.transform = 'scale(1)';
+            img.src = GALLERY[currentIdx];
+            document.getElementById('lightbox-counter').textContent = (currentIdx + 1) + ' / ' + GALLERY.length;
+        }
+        function toggleZoom() {
+            zoomed = !zoomed;
+            document.getElementById('lightbox-img').style.transform = zoomed ? 'scale(2)' : 'scale(1)';
+            const wrap = document.getElementById('lightbox-img-wrap');
+            if (zoomed) {
+                wrap.classList.remove('cursor-zoom-in'); wrap.classList.add('cursor-zoom-out');
+            } else {
+                wrap.classList.remove('cursor-zoom-out'); wrap.classList.add('cursor-zoom-in');
+            }
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.add('hidden');
+            zoomed = false;
+            document.getElementById('lightbox-img').style.transform = 'scale(1)';
+        }
+        function handleLightboxClick(e) { closeLightbox(); }
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft')  navLightbox(-1);
+            if (e.key === 'ArrowRight') navLightbox(1);
+        });
+
+        // One video at a time
+        document.querySelectorAll('#video-grid video').forEach(v => {
+            v.addEventListener('play', () => {
+                document.querySelectorAll('#video-grid video').forEach(o => { if (o !== v) o.pause(); });
+            });
+        });
+    </script>
+</body>
+</html>
