@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VisionWorks | الرؤية الذكية</title>
-    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="icon" href="media/favicon.png" type="image/png">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R1SB205C47"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-R1SB205C47');</script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
@@ -23,7 +26,7 @@
     <nav class="sticky top-0 w-full bg-white/95 backdrop-blur-sm border-b border-slate-100 py-3 px-6 z-50">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-4">
-                <img src="favicon.png" alt="VisionWorks" class="h-16 w-auto">
+                <img src="media/favicon.png" alt="VisionWorks" class="h-16 w-auto">
                 <span class="font-black text-2xl tracking-tighter">Vision<span class="text-brand">Works</span></span>
             </div>
             <div class="hidden md:flex gap-8 font-bold text-sm text-slate-600 uppercase tracking-widest items-center">
@@ -72,7 +75,7 @@
     <section id="about" class="py-32 px-6 bg-slate-50">
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
             <div data-aos="fade-right">
-                <img src="logo-eye.jpg" alt="VisionWorks" class="rounded-[2.5rem] w-full object-cover shadow-xl">
+                <img src="media/logo-eye.jpg" alt="VisionWorks" class="rounded-[2.5rem] w-full object-cover shadow-xl">
             </div>
             <div data-aos="fade-left">
                 <h2 class="text-5xl font-black mb-8" data-en="Who We Are" data-ar="من نحن">من نحن</h2>
@@ -97,7 +100,7 @@
             <div class="grid md:grid-cols-2 gap-16 items-center">
                 <div data-aos="fade-right">
                     <video autoplay muted loop playsinline class="w-full rounded-[2.5rem] shadow-2xl">
-                        <source src="QumraOne_W4.mp4" type="video/mp4">
+                        <source src="media/QumraOne_W4.mp4" type="video/mp4">
                     </video>
                 </div>
                 <div data-aos="fade-left">
@@ -110,6 +113,10 @@
                         <li class="flex items-center gap-3"><span class="text-brand font-black">&#10003;</span> <span data-en="Industrial-grade hardware" data-ar="أجهزة بمواصفات صناعية">أجهزة بمواصفات صناعية</span></li>
                         <li class="flex items-center gap-3"><span class="text-brand font-black">&#10003;</span> <span data-en="Seamless ERP integration" data-ar="تكامل سلس مع أنظمة ERP">تكامل سلس مع أنظمة ERP</span></li>
                     </ul>
+                    <div class="flex gap-4 mt-10 flex-wrap">
+                        <a href="qumraone.html" class="inline-block bg-brand text-white font-bold px-8 py-4 rounded-2xl hover:opacity-90 transition" data-en="Learn More" data-ar="اعرف المزيد">اعرف المزيد</a>
+                        <a href="#contact" class="inline-block border-2 border-slate-600 text-slate-300 font-bold px-8 py-4 rounded-2xl hover:border-brand hover:text-brand transition" data-en="Request a Demo" data-ar="طلب عرض تجريبي">طلب عرض تجريبي</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -144,7 +151,7 @@
     <!-- Contact -->
     <footer id="contact" class="bg-slate-950 text-white py-32 px-6">
         <div class="max-w-2xl mx-auto text-center">
-            <img src="favicon.png" alt="Logo" class="h-40 mx-auto mb-12 rounded-2xl">
+            <img src="media/favicon.png" alt="Logo" class="h-40 mx-auto mb-12 rounded-2xl">
             <h2 class="text-5xl font-black mb-4" data-en="Get in Touch" data-ar="تواصل معنا">تواصل معنا</h2>
             <p class="text-slate-400 mb-12" data-en="Ready to bring AI-powered vision to your production line?" data-ar="هل أنت مستعد لإدخال الرؤية المدعومة بالذكاء الاصطناعي إلى خط إنتاجك؟">هل أنت مستعد لإدخال الرؤية المدعومة بالذكاء الاصطناعي إلى خط إنتاجك؟</p>
 
@@ -371,7 +378,7 @@
                 <a href="${post.href}" target="_blank" rel="noopener"
                    class="bg-white rounded-[2rem] p-8 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all flex flex-col gap-4" data-aos="fade-up" data-aos-delay="${i * 100}">
                     <div class="flex items-center gap-3">
-                        <img src="favicon.png" alt="VisionWorks" class="w-10 h-10 rounded-full object-cover">
+                        <img src="media/favicon.png" alt="VisionWorks" class="w-10 h-10 rounded-full object-cover">
                         <div>
                             <p class="font-bold text-sm">VisionWorks</p>
                             <p class="text-slate-400 text-xs">LinkedIn</p>

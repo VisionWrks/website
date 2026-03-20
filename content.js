@@ -25,25 +25,25 @@ const SERVICES = [
 
 const PORTFOLIO = [
     {
-        logo: "logo-autocool.jpg",
+        logo: "media/logo-autocool.jpg",
         client: "Autocool",
         url: "https://www.autocool-egypt.com/",
         en: { tag: "Automotive Manufacturing", title: "AI Assembly Inspection — Jeep W4", desc: "Deployed QumraOne AI camera on the Jeep W4 assembly line with Cleco wireless screwdriver integration, achieving 95%+ inspection accuracy and real-time torque verification." },
         ar: { tag: "تصنيع السيارات",            title: "فحص التجميع بالذكاء الاصطناعي — Jeep W4", desc: "نشر كاميرا QumraOne على خط تجميع Jeep W4 مع دمج مفكات Cleco اللاسلكية، مع تحقيق دقة فحص تتجاوز 95% والتحقق الفوري من عزم الشد." }
     },
     {
-        logo: "logo-juhayna.png",
+        logo: "media/logo-juhayna.png",
         client: "Juhayna",
         url: "https://www.juhayna.com/",
-        en: { tag: "Food & Beverage",           title: "Production Line Visual Inspection", desc: "Add description of work done with Juhayna here." },
-        ar: { tag: "الغذاء والمشروبات",          title: "الفحص البصري لخط الإنتاج",          desc: "أضف وصف العمل المنجز مع جهينة هنا." }
+        en: { tag: "Food & Beverage",           title: "Tomato Production Line Inspection", desc: "Deployed an AI-powered visual inspection system on Juhayna's tomato processing line to automatically detect and reject defective tomatoes in real time, improving product quality and reducing manual sorting effort." },
+        ar: { tag: "الغذاء والمشروبات",          title: "فحص خط إنتاج الطماطم",              desc: "نشر نظام فحص بصري مدعوم بالذكاء الاصطناعي على خط معالجة الطماطم في جهينة، للكشف التلقائي عن الطماطم المعيبة وفرزها في الوقت الفعلي، مما يحسن جودة المنتج ويقلل جهد الفرز اليدوي." }
     },
     {
-        logo: "logo-mrc.png",
+        logo: "media/logo-mrc.png",
         client: "Misr Radiology Center",
         url: "https://www.misrradiologycenter.com/",
-        en: { tag: "Healthcare",                title: "AI-Powered Radiology Support",      desc: "Add description of work done with Misr Radiology Center here." },
-        ar: { tag: "الرعاية الصحية",             title: "دعم الأشعة بالذكاء الاصطناعي",      desc: "أضف وصف العمل المنجز مع مركز مصر للأشعة هنا." }
+        en: { tag: "Healthcare",                title: "Reception Crowdedness KPI Monitoring", desc: "Installed an AI-powered KPI monitoring system at Misr Radiology Center to measure and track reception area crowdedness in real time, enabling management to optimize patient flow and reduce wait times." },
+        ar: { tag: "الرعاية الصحية",             title: "مراقبة مؤشرات الأداء لازدحام الاستقبال", desc: "تركيب نظام مراقبة مؤشرات أداء مدعوم بالذكاء الاصطناعي في مركز مصر للأشعة لقياس ومتابعة ازدحام منطقة الاستقبال في الوقت الفعلي، مما يمكّن الإدارة من تحسين تدفق المرضى وتقليل أوقات الانتظار." }
     },
 ];
 
