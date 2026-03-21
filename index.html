@@ -34,6 +34,7 @@
                 <a href="#services"  data-en="Services"  data-ar="خدماتنا"    class="hover:text-brand transition">خدماتنا</a>
                 <a href="#products"  data-en="Products"  data-ar="منتجاتنا"   class="hover:text-brand transition">منتجاتنا</a>
                 <a href="#portfolio" data-en="Portfolio" data-ar="أعمالنا"      class="hover:text-brand transition">أعمالنا</a>
+                <a href="#tutorials" data-en="Tutorials" data-ar="دروس تعليمية" class="hover:text-brand transition">دروس تعليمية</a>
                 <a href="#updates"  data-en="Updates"   data-ar="المستجدات"   class="hover:text-brand transition">المستجدات</a>
                 <a href="#contact"  data-en="Contact"   data-ar="اتصل بنا"    class="hover:text-brand transition">اتصل بنا</a>
             </div>
@@ -54,7 +55,8 @@
             <a href="#about"     onclick="closeMobileMenu()" class="px-4 py-2 font-bold text-sm text-slate-600 hover:text-brand rounded-xl uppercase tracking-widest" data-en="About"     data-ar="عن الشركة">عن الشركة</a>
             <a href="#services"  onclick="closeMobileMenu()" class="px-4 py-2 font-bold text-sm text-slate-600 hover:text-brand rounded-xl uppercase tracking-widest" data-en="Services"  data-ar="خدماتنا">خدماتنا</a>
             <a href="#products"  onclick="closeMobileMenu()" class="px-4 py-2 font-bold text-sm text-slate-600 hover:text-brand rounded-xl uppercase tracking-widest" data-en="Products"  data-ar="منتجاتنا">منتجاتنا</a>
-            <a href="#portfolio" onclick="closeMobileMenu()" class="px-4 py-2 font-bold text-sm text-slate-600 hover:text-brand rounded-xl uppercase tracking-widest" data-en="Portfolio" data-ar="أعمالنا">أعمالنا</a>
+            <a href="#portfolio"  onclick="closeMobileMenu()" class="px-4 py-2 font-bold text-sm text-slate-600 hover:text-brand rounded-xl uppercase tracking-widest" data-en="Portfolio"  data-ar="أعمالنا">أعمالنا</a>
+            <a href="#tutorials" onclick="closeMobileMenu()" class="px-4 py-2 font-bold text-sm text-slate-600 hover:text-brand rounded-xl uppercase tracking-widest" data-en="Tutorials" data-ar="دروس تعليمية">دروس تعليمية</a>
             <a href="#updates"   onclick="closeMobileMenu()" class="px-4 py-2 font-bold text-sm text-slate-600 hover:text-brand rounded-xl uppercase tracking-widest" data-en="Updates"   data-ar="المستجدات">المستجدات</a>
             <a href="#contact"   onclick="closeMobileMenu()" class="px-4 py-2 font-bold text-sm text-slate-600 hover:text-brand rounded-xl uppercase tracking-widest" data-en="Contact"   data-ar="اتصل بنا">اتصل بنا</a>
         </div>
@@ -144,6 +146,15 @@
             <h2 class="text-3xl md:text-5xl font-black mb-4 text-center" data-en="Our Work" data-ar="أعمالنا">أعمالنا</h2>
             <p class="text-center text-slate-400 mb-20" data-en="Case studies from real deployments." data-ar="دراسات حالة من عمليات نشر حقيقية.">دراسات حالة من عمليات نشر حقيقية.</p>
             <div id="portfolio-grid" class="grid md:grid-cols-3 gap-8"></div>
+        </div>
+    </section>
+
+    <!-- Tutorials -->
+    <section id="tutorials" class="py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl md:text-5xl font-black mb-4 text-center" data-en="Tutorials" data-ar="دروس تعليمية">دروس تعليمية</h2>
+            <p class="text-center text-slate-400 mb-20" data-en="See our products in action." data-ar="شاهد منتجاتنا في العمل.">شاهد منتجاتنا في العمل.</p>
+            <div id="tutorials-grid" class="flex flex-wrap justify-center gap-8"></div>
         </div>
     </section>
 
@@ -406,8 +417,22 @@
                 </a>`).join('');
         }
 
+        function renderTutorials() {
+            document.getElementById('tutorials-grid').innerHTML = TUTORIALS.map((t, i) => `
+                <div class="bg-slate-50 rounded-[2rem] overflow-hidden border border-slate-100 w-full max-w-lg" data-aos="fade-up" data-aos-delay="${i * 100}">
+                    <div class="flex justify-center bg-white p-4 border-b border-slate-100">
+                        <iframe src="${t.embed}" height="399" width="504" frameborder="0" allowfullscreen title="Embedded post" style="max-width:100%"></iframe>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-black text-xl mb-2" data-en="${t.en.title}" data-ar="${t.ar.title}">${t.ar.title}</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed" data-en="${t.en.desc}" data-ar="${t.ar.desc}">${t.ar.desc}</p>
+                    </div>
+                </div>`).join('');
+        }
+
         renderServices();
         renderPortfolio();
+        renderTutorials();
         renderPosts();
 
         const statsSection = document.querySelector('.grid.md\\:grid-cols-3');
