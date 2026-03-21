@@ -240,6 +240,15 @@
         </div>
     </section>
 
+    <!-- Tutorials -->
+    <section id="tutorials" class="py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl md:text-5xl font-black mb-4 text-center" data-en="Tutorials" data-ar="دروس تعليمية">دروس تعليمية</h2>
+            <p class="text-center text-slate-400 mb-20" data-en="See our products in action." data-ar="شاهد منتجاتنا في العمل.">شاهد منتجاتنا في العمل.</p>
+            <div id="tutorials-grid" class="flex flex-wrap justify-center gap-8"></div>
+        </div>
+    </section>
+
     <!-- CTA -->
     <section class="py-32 px-6 bg-brand text-white text-center">
         <div class="max-w-3xl mx-auto" data-aos="fade-up">
@@ -253,9 +262,24 @@
         <p>&copy; 2026 VisionWorks. <a href="index.html" class="hover:text-white transition" data-en="Back to Home" data-ar="العودة للرئيسية">العودة للرئيسية</a> · <a href="privacy.html" class="hover:text-white transition" data-en="Privacy Policy" data-ar="سياسة الخصوصية">سياسة الخصوصية</a></p>
     </footer>
 
+    <script src="content.js"></script>
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 700, once: true, easing: 'ease-out-quad' });
+
+        function renderTutorials() {
+            document.getElementById('tutorials-grid').innerHTML = TUTORIALS.map((t, i) => `
+                <div class="bg-slate-50 rounded-[2rem] overflow-hidden border border-slate-100 w-full max-w-lg" data-aos="fade-up" data-aos-delay="${i * 100}">
+                    <div class="flex justify-center bg-white p-4 border-b border-slate-100">
+                        <iframe src="${t.embed}" height="399" width="504" frameborder="0" allowfullscreen title="Embedded post" style="max-width:100%"></iframe>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-black text-xl mb-2" data-en="${t.en.title}" data-ar="${t.ar.title}">${t.ar.title}</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed" data-en="${t.en.desc}" data-ar="${t.ar.desc}">${t.ar.desc}</p>
+                    </div>
+                </div>`).join('');
+        }
+        renderTutorials();
 
         function setLanguage(lang) {
             const html = document.getElementById('mainHtml');
