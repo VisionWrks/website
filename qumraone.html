@@ -31,6 +31,17 @@
             </a>
             <div class="flex items-center gap-2">
                 <a href="index.html#contact" class="hidden md:block font-bold text-sm text-slate-600 hover:text-brand transition uppercase tracking-widest" data-en="Contact" data-ar="اتصل بنا">اتصل بنا</a>
+                <div id="nav-auth" class="hidden md:flex items-center gap-2">
+                    <a id="nav-login-btn" href="auth.html"
+                       class="bg-brand text-white text-sm font-bold px-4 py-2 rounded-xl hover:opacity-90 transition"
+                       data-en="Login" data-ar="تسجيل الدخول">تسجيل الدخول</a>
+                    <div id="nav-user" class="hidden items-center gap-2">
+                        <span id="nav-username" class="text-sm font-bold text-slate-700"></span>
+                        <button onclick="doLogout()"
+                            class="text-xs font-bold text-slate-400 hover:text-brand transition"
+                            data-en="Logout" data-ar="خروج">خروج</button>
+                    </div>
+                </div>
                 <div class="flex bg-gray-100 p-1 rounded-xl">
                     <button id="btn-en" class="text-gray-400 px-4 py-1.5 rounded-lg text-sm font-bold hover:text-slate-900 transition">EN</button>
                     <button id="btn-ar" class="bg-brand text-white px-4 py-1.5 rounded-lg text-sm font-bold shadow transition">AR</button>
@@ -46,6 +57,16 @@
         <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 mt-3 pt-3 pb-2 flex flex-col gap-1">
             <a href="index.html" class="px-4 py-2 font-bold text-sm text-slate-600 hover:text-brand rounded-xl uppercase tracking-widest" data-en="Home" data-ar="الرئيسية">الرئيسية</a>
             <a href="index.html#contact" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="px-4 py-2 font-bold text-sm text-slate-600 hover:text-brand rounded-xl uppercase tracking-widest" data-en="Contact" data-ar="اتصل بنا">اتصل بنا</a>
+            <div class="border-t border-slate-100 mt-1 pt-2">
+                <a id="mobile-login-btn" href="auth.html"
+                   class="px-4 py-2 font-bold text-sm text-brand rounded-xl block"
+                   data-en="Login / Sign Up" data-ar="تسجيل الدخول / إنشاء حساب">تسجيل الدخول / إنشاء حساب</a>
+                <div id="mobile-user" class="hidden px-4 py-2 flex items-center justify-between">
+                    <span id="mobile-username" class="text-sm font-bold text-slate-700"></span>
+                    <button onclick="doLogout()" class="text-xs font-bold text-slate-400 hover:text-brand transition"
+                        data-en="Logout" data-ar="خروج">خروج</button>
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -357,6 +378,42 @@
                 document.querySelectorAll('#video-grid video').forEach(o => { if (o !== v) o.pause(); });
             });
         });
+
+        // ── Auth state in navbar ──────────────────────────────────────────────
+        const API_BASE = '';
+        (async function initAuth() {
+            try {
+                const res = await fetch(API_BASE + '/api/auth/me', { credentials: 'include' });
+                const navAuth      = document.getElementById('nav-auth');
+                const navLoginBtn  = document.getElementById('nav-login-btn');
+                const navUser      = document.getElementById('nav-user');
+                const navUsername  = document.getElementById('nav-username');
+                const mobileLogin  = document.getElementById('mobile-login-btn');
+                const mobileUser   = document.getElementById('mobile-user');
+                const mobileUname  = document.getElementById('mobile-username');
+
+                navAuth.classList.remove('hidden');
+
+                if (res.ok) {
+                    const { user } = await res.json();
+                    navLoginBtn.classList.add('hidden');
+                    navUser.classList.remove('hidden');
+                    navUser.classList.add('flex');
+                    navUsername.textContent = user.name;
+                    mobileLogin.classList.add('hidden');
+                    mobileUser.classList.remove('hidden');
+                    mobileUser.classList.add('flex');
+                    mobileUname.textContent = user.name;
+                }
+            } catch (_) {
+                document.getElementById('nav-auth').classList.remove('hidden');
+            }
+        })();
+
+        async function doLogout() {
+            await fetch(API_BASE + '/api/auth/logout', { method: 'POST', credentials: 'include' });
+            location.reload();
+        }
     </script>
 </body>
 </html>
