@@ -12,14 +12,17 @@ require('./config/passport');
 const app = express();
 
 // ─── Database (cached for serverless) ────────────────────────────────────────
-let dbConnected = false;
-async function connectDB() {
-  if (dbConnected || mongoose.connection.readyState === 1) return;
-  await mongoose.connect(process.env.MONGODB_URI);
-  dbConnected = true;
-  console.log('[DB] MongoDB connected');
+mongoose.set('bufferCommands', false);  // don't queue ops while disconnected
+
+if (mongoose.connection.readyState === 0) {
+  mongoose.connect(process.env.MONGODB_URI, {
+    serverSelectionTimeoutMS: 5000,   // fail fast instead of hanging
+    socketTimeoutMS:          45000,
+    maxPoolSize:              1        // one connection per serverless instance
+  })
+    .then(() => console.log('[DB] MongoDB connected'))
+    .catch(err => console.error('[DB] Connection error:', err));
 }
-connectDB().catch(err => console.error('[DB] Connection error:', err));
 
 // ─── CORS ─────────────────────────────────────────────────────────────────────
 const allowedOrigins = (process.env.FRONTEND_URL || '')
@@ -47,9 +50,9 @@ app.use(session({
   resave:            false,
   saveUninitialized: false,
   store: MongoStore.create({
-    mongoUrl:   process.env.MONGODB_URI,
-    ttl:        24 * 60 * 60,
-    autoRemove: 'native'
+    mongooseConnection: mongoose.connection,  // reuse the same connection
+    ttl:                24 * 60 * 60,
+    autoRemove:         'native'
   }),
   cookie: {
     maxAge:   24 * 60 * 60 * 1000,
@@ -67,11 +70,13 @@ app.use(passport.session());
 app.use('/api/auth', require('./routes/auth'));
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 
-// ─── Static Files ─────────────────────────────────────────────────────────────
-// Serves the website for both Vercel (serverless) and local dev
-const path     = require('path');
-const SITE_ROOT = path.join(__dirname, '..');
-app.use(express.static(SITE_ROOT));
-app.get('*', (req, res) => res.sendFile(path.join(SITE_ROOT, 'index.html')));
+// ─── Static Files (local dev only) ───────────────────────────────────────────
+// On Vercel, static files are served by the CDN — no need for Express to handle them.
+if (!process.env.VERCEL) {
+  const path      = require('path');
+  const SITE_ROOT = path.join(__dirname, '..');
+  app.use(express.static(SITE_ROOT));
+  app.get('*', (req, res) => res.sendFile(path.join(SITE_ROOT, 'index.html')));
+}
 
 module.exports = app;
