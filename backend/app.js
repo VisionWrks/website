@@ -19,6 +19,9 @@ require('./config/passport');
 
 const app = express();
 
+// Trust Render/Vercel/etc. reverse proxy so secure cookies work over HTTPS
+app.set('trust proxy', 1);
+
 // ─── Database (cached for serverless) ────────────────────────────────────────
 mongoose.set('bufferCommands', false);  // don't queue ops while disconnected
 
