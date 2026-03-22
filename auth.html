@@ -133,7 +133,7 @@
           <!-- ── Social Buttons ── -->
           <div class="space-y-3">
             <!-- Google -->
-            <a href="/api/auth/google"
+            <a id="btn-google" href="/api/auth/google"
                class="social-btn flex items-center justify-center gap-3 w-full border-2 border-slate-200 rounded-xl py-3 font-bold text-sm text-slate-700 hover:border-slate-300 bg-white">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="w-5 h-5">
                 <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
@@ -145,7 +145,7 @@
             </a>
 
             <!-- Apple -->
-            <a href="/api/auth/apple"
+            <a id="btn-apple" href="/api/auth/apple"
                class="social-btn flex items-center justify-center gap-3 w-full bg-black text-white rounded-xl py-3 font-bold text-sm">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 814 1000" class="w-5 h-5 fill-white">
                 <path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-57.8-155.5-127.4C46 411.6 0 301.2 0 194.3 0 75.7 55.1 13.2 135.4 13.2c43.8 0 101.1 27.5 138.2 27.5 35.3 0 101.6-29.8 157.6-29.8 24.5 0 108.2 2.6 164.7 81.4zm-244.7-75.1c25.1-34.1 43.1-81.1 43.1-128.1 0-6.5-.6-13-1.9-18.3-40.8 1.9-89.1 27.5-117.8 58.1-22.4 24.5-43.7 71.5-43.7 119.2 0 6.5 1.3 13 1.9 15.1 2.6.6 6.5 1.3 10.4 1.3 36.7 0 82.1-24.5 108-47.3z"/>
@@ -168,6 +168,11 @@
   </main>
 
   <script>
+    // ── Backend URL — update this after deploying the backend ─────────────────
+    // Local dev:  leave as empty string (relative URLs)
+    // Production: set to your Render/Railway URL, e.g. 'https://visionworks-api.onrender.com'
+    const API_BASE = '';
+
     // ── Language ──────────────────────────────────────────────────────────────
     const html = document.getElementById('mainHtml');
 
@@ -196,6 +201,12 @@
 
     // Initialise with Arabic
     setLang('ar');
+
+    // Point OAuth buttons at the backend
+    if (API_BASE) {
+      document.getElementById('btn-google').href = API_BASE + '/api/auth/google';
+      document.getElementById('btn-apple').href  = API_BASE + '/api/auth/apple';
+    }
 
     // ── Tab switching ─────────────────────────────────────────────────────────
     function switchTab(tab) {
@@ -248,7 +259,7 @@
       btn.textContent = html.lang === 'ar' ? 'جارٍ التحقق...' : 'Signing in...';
 
       try {
-        const res = await fetch('/api/auth/login', {
+        const res = await fetch(API_BASE + '/api/auth/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include',
@@ -276,7 +287,7 @@
       btn.textContent = html.lang === 'ar' ? 'جارٍ الإنشاء...' : 'Creating account...';
 
       try {
-        const res = await fetch('/api/auth/signup', {
+        const res = await fetch(API_BASE + '/api/auth/signup', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include',

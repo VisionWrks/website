@@ -535,10 +535,15 @@
     </script>
 
     <script>
+        // ── Backend URL — must match the value set in auth.html ───────────────
+        // Local dev:  leave as empty string
+        // Production: 'https://visionworks-api.onrender.com'
+        const API_BASE = '';
+
         // ── Auth state in navbar ──────────────────────────────────────────────
         (async function initAuth() {
             try {
-                const res = await fetch('/api/auth/me', { credentials: 'include' });
+                const res = await fetch(API_BASE + '/api/auth/me', { credentials: 'include' });
                 const navAuth      = document.getElementById('nav-auth');
                 const navLoginBtn  = document.getElementById('nav-login-btn');
                 const navUser      = document.getElementById('nav-user');
@@ -569,7 +574,7 @@
         })();
 
         async function doLogout() {
-            await fetch('/api/auth/logout', { method: 'POST', credentials: 'include' });
+            await fetch(API_BASE + '/api/auth/logout', { method: 'POST', credentials: 'include' });
             location.reload();
         }
     </script>

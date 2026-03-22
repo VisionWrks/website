@@ -18,8 +18,19 @@ mongoose.connect(process.env.MONGODB_URI)
   .catch(err => { console.error('[DB] Connection error:', err); process.exit(1); });
 
 // ─── CORS ─────────────────────────────────────────────────────────────────────
+const allowedOrigins = (process.env.FRONTEND_URL || '')
+  .split(',')
+  .map(o => o.trim())
+  .filter(Boolean);
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || true,
+  origin: allowedOrigins.length
+    ? (origin, cb) => {
+        // Allow requests with no origin (server-to-server, curl, etc.)
+        if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
+        cb(new Error(`CORS: origin ${origin} not allowed`));
+      }
+    : true,
   credentials: true
 }));
 
