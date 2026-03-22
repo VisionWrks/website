@@ -67,4 +67,11 @@ app.use(passport.session());
 app.use('/api/auth', require('./routes/auth'));
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 
+// ─── Static Files ─────────────────────────────────────────────────────────────
+// Serves the website for both Vercel (serverless) and local dev
+const path     = require('path');
+const SITE_ROOT = path.join(__dirname, '..');
+app.use(express.static(SITE_ROOT));
+app.get('*', (req, res) => res.sendFile(path.join(SITE_ROOT, 'index.html')));
+
 module.exports = app;
