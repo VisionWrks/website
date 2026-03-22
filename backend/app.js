@@ -19,7 +19,7 @@ require('./config/passport');
 
 const app = express();
 
-// Trust Render/Vercel/etc. reverse proxy so secure cookies work over HTTPS
+// Trust reverse proxy so secure cookies work over HTTPS
 app.set('trust proxy', 1);
 
 // ─── Database (cached for serverless) ────────────────────────────────────────
@@ -81,13 +81,10 @@ app.use(passport.session());
 app.use('/api/auth', require('./routes/auth'));
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 
-// ─── Static Files (local dev only) ───────────────────────────────────────────
-// On Vercel, static files are served by the CDN — no need for Express to handle them.
-if (!process.env.VERCEL) {
-  const path      = require('path');
-  const SITE_ROOT = path.join(__dirname, '..');
-  app.use(express.static(SITE_ROOT));
-  app.get('*', (req, res) => res.sendFile(path.join(SITE_ROOT, 'index.html')));
-}
+// ─── Static Files ─────────────────────────────────────────────────────────────
+const path      = require('path');
+const SITE_ROOT = path.join(__dirname, '..');
+app.use(express.static(SITE_ROOT));
+app.get('*', (req, res) => res.sendFile(path.join(SITE_ROOT, 'index.html')));
 
 module.exports = app;
