@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="mainHtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VisionWorks | Login</title>
+  <link rel="icon" href="media/favicon.png" type="image/png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --brand: #e9528d; }
+    .text-brand { color: var(--brand); }
+    .bg-brand   { background-color: var(--brand); }
+    .ring-brand { --tw-ring-color: var(--brand); }
+    .border-brand { border-color: var(--brand); }
+    [dir="rtl"] { font-family: 'Noto Sans Arabic', sans-serif; }
+    [dir="ltr"] { font-family: 'Inter', sans-serif; }
+    .tab-active   { background: var(--brand); color: #fff; }
+    .tab-inactive { color: #64748b; }
+    input:focus { outline: none; box-shadow: 0 0 0 2px var(--brand); }
+    .social-btn { transition: opacity .15s, transform .15s; }
+    .social-btn:hover { opacity: .85; transform: translateY(-1px); }
+    #toast {
+      position: fixed; top: 1.5rem; left: 50%; transform: translateX(-50%);
+      padding: .75rem 1.5rem; border-radius: 1rem; font-weight: 700;
+      font-size: .9rem; z-index: 9999; display: none;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 min-h-screen flex flex-col">
+
+  <!-- Toast notification -->
+  <div id="toast"></div>
+
+  <!-- Nav -->
+  <nav class="w-full px-6 py-4 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-3">
+      <img src="media/favicon.png" alt="VisionWorks" class="h-10 w-auto">
+      <span class="font-black text-xl text-white tracking-tighter">Vision<span class="text-brand">Works</span></span>
+    </a>
+    <div class="flex bg-slate-800 p-1 rounded-xl">
+      <button id="btn-en" class="text-slate-400 px-4 py-1.5 rounded-lg text-sm font-bold hover:text-white transition" onclick="setLang('en')">EN</button>
+      <button id="btn-ar" class="bg-brand text-white px-4 py-1.5 rounded-lg text-sm font-bold shadow transition"       onclick="setLang('ar')">AR</button>
+    </div>
+  </nav>
+
+  <!-- Card -->
+  <main class="flex-1 flex items-center justify-center px-4 py-12">
+    <div class="w-full max-w-md">
+
+      <!-- Logo -->
+      <div class="text-center mb-8">
+        <h1 class="text-3xl font-black text-white mt-4">Vision<span class="text-brand">Works</span></h1>
+        <p id="tagline" class="text-slate-400 mt-1 text-sm">الرؤية الذكية للصناعة</p>
+      </div>
+
+      <!-- Card -->
+      <div class="bg-white rounded-3xl shadow-2xl overflow-hidden">
+
+        <!-- Tabs -->
+        <div class="flex">
+          <button id="tab-login"  onclick="switchTab('login')"
+            class="tab-active flex-1 py-4 text-sm font-bold transition rounded-tl-3xl"
+            data-en="Login" data-ar="تسجيل الدخول">تسجيل الدخول</button>
+          <button id="tab-signup" onclick="switchTab('signup')"
+            class="tab-inactive flex-1 py-4 text-sm font-bold transition rounded-tr-3xl bg-slate-50"
+            data-en="Sign Up" data-ar="إنشاء حساب">إنشاء حساب</button>
+        </div>
+
+        <div class="p-8">
+
+          <!-- ── Login Form ── -->
+          <form id="form-login" class="space-y-4" onsubmit="submitLogin(event)">
+            <div>
+              <label class="block text-xs font-bold text-slate-500 mb-1.5 uppercase tracking-wider"
+                     data-en="Email" data-ar="البريد الإلكتروني">البريد الإلكتروني</label>
+              <input type="email" id="login-email" required autocomplete="email"
+                class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm placeholder-slate-400"
+                placeholder-ar="أدخل بريدك الإلكتروني" placeholder-en="Enter your email"
+                placeholder="أدخل بريدك الإلكتروني">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-500 mb-1.5 uppercase tracking-wider"
+                     data-en="Password" data-ar="كلمة المرور">كلمة المرور</label>
+              <input type="password" id="login-password" required autocomplete="current-password"
+                class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm placeholder-slate-400"
+                placeholder-ar="أدخل كلمة المرور" placeholder-en="Enter your password"
+                placeholder="أدخل كلمة المرور">
+            </div>
+            <button type="submit" id="btn-login-submit"
+              class="w-full bg-brand text-white font-bold py-3.5 rounded-xl hover:opacity-90 transition mt-2"
+              data-en="Login" data-ar="تسجيل الدخول">تسجيل الدخول</button>
+          </form>
+
+          <!-- ── Signup Form ── -->
+          <form id="form-signup" class="space-y-4 hidden" onsubmit="submitSignup(event)">
+            <div>
+              <label class="block text-xs font-bold text-slate-500 mb-1.5 uppercase tracking-wider"
+                     data-en="Full Name" data-ar="الاسم الكامل">الاسم الكامل</label>
+              <input type="text" id="signup-name" required autocomplete="name"
+                class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm placeholder-slate-400"
+                placeholder-ar="أدخل اسمك الكامل" placeholder-en="Enter your full name"
+                placeholder="أدخل اسمك الكامل">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-500 mb-1.5 uppercase tracking-wider"
+                     data-en="Email" data-ar="البريد الإلكتروني">البريد الإلكتروني</label>
+              <input type="email" id="signup-email" required autocomplete="email"
+                class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm placeholder-slate-400"
+                placeholder-ar="أدخل بريدك الإلكتروني" placeholder-en="Enter your email"
+                placeholder="أدخل بريدك الإلكتروني">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-500 mb-1.5 uppercase tracking-wider"
+                     data-en="Password" data-ar="كلمة المرور">كلمة المرور</label>
+              <input type="password" id="signup-password" required autocomplete="new-password"
+                class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm placeholder-slate-400"
+                placeholder-ar="8 أحرف على الأقل" placeholder-en="At least 8 characters"
+                placeholder="8 أحرف على الأقل">
+            </div>
+            <button type="submit" id="btn-signup-submit"
+              class="w-full bg-brand text-white font-bold py-3.5 rounded-xl hover:opacity-90 transition mt-2"
+              data-en="Create Account" data-ar="إنشاء حساب">إنشاء حساب</button>
+          </form>
+
+          <!-- ── Divider ── -->
+          <div class="flex items-center gap-3 my-6">
+            <div class="flex-1 h-px bg-slate-200"></div>
+            <span id="divider-text" class="text-slate-400 text-xs font-bold">أو تابع مع</span>
+            <div class="flex-1 h-px bg-slate-200"></div>
+          </div>
+
+          <!-- ── Social Buttons ── -->
+          <div class="space-y-3">
+            <!-- Google -->
+            <a href="/api/auth/google"
+               class="social-btn flex items-center justify-center gap-3 w-full border-2 border-slate-200 rounded-xl py-3 font-bold text-sm text-slate-700 hover:border-slate-300 bg-white">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="w-5 h-5">
+                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+              </svg>
+              <span data-en="Continue with Google" data-ar="تابع باستخدام Google">تابع باستخدام Google</span>
+            </a>
+
+            <!-- Apple -->
+            <a href="/api/auth/apple"
+               class="social-btn flex items-center justify-center gap-3 w-full bg-black text-white rounded-xl py-3 font-bold text-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 814 1000" class="w-5 h-5 fill-white">
+                <path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-57.8-155.5-127.4C46 411.6 0 301.2 0 194.3 0 75.7 55.1 13.2 135.4 13.2c43.8 0 101.1 27.5 138.2 27.5 35.3 0 101.6-29.8 157.6-29.8 24.5 0 108.2 2.6 164.7 81.4zm-244.7-75.1c25.1-34.1 43.1-81.1 43.1-128.1 0-6.5-.6-13-1.9-18.3-40.8 1.9-89.1 27.5-117.8 58.1-22.4 24.5-43.7 71.5-43.7 119.2 0 6.5 1.3 13 1.9 15.1 2.6.6 6.5 1.3 10.4 1.3 36.7 0 82.1-24.5 108-47.3z"/>
+              </svg>
+              <span data-en="Continue with Apple" data-ar="تابع باستخدام Apple">تابع باستخدام Apple</span>
+            </a>
+          </div>
+
+        </div><!-- /p-8 -->
+      </div><!-- /card -->
+
+      <p class="text-center text-slate-500 text-xs mt-6">
+        <a href="privacy.html" class="hover:text-white transition"
+           data-en="Privacy Policy" data-ar="سياسة الخصوصية">سياسة الخصوصية</a>
+        &nbsp;·&nbsp;
+        <a href="index.html" class="hover:text-white transition"
+           data-en="Back to Home" data-ar="العودة للرئيسية">العودة للرئيسية</a>
+      </p>
+    </div>
+  </main>
+
+  <script>
+    // ── Language ──────────────────────────────────────────────────────────────
+    const html = document.getElementById('mainHtml');
+
+    function setLang(lang) {
+      html.lang = lang;
+      html.dir  = lang === 'ar' ? 'rtl' : 'ltr';
+      document.getElementById('btn-en').className = lang === 'en'
+        ? 'bg-brand text-white px-4 py-1.5 rounded-lg text-sm font-bold shadow transition'
+        : 'text-slate-400 px-4 py-1.5 rounded-lg text-sm font-bold hover:text-white transition';
+      document.getElementById('btn-ar').className = lang === 'ar'
+        ? 'bg-brand text-white px-4 py-1.5 rounded-lg text-sm font-bold shadow transition'
+        : 'text-slate-400 px-4 py-1.5 rounded-lg text-sm font-bold hover:text-white transition';
+      document.getElementById('tagline').textContent =
+        lang === 'en' ? 'Smart Vision for Industry' : 'الرؤية الذكية للصناعة';
+      document.getElementById('divider-text').textContent =
+        lang === 'en' ? 'or continue with' : 'أو تابع مع';
+      // translate all data-en/data-ar elements
+      document.querySelectorAll('[data-en]').forEach(el => {
+        el.textContent = el.dataset[lang] || el.textContent;
+      });
+      // translate placeholders
+      document.querySelectorAll('[placeholder-en]').forEach(el => {
+        el.placeholder = el.getAttribute(`placeholder-${lang}`) || el.placeholder;
+      });
+    }
+
+    // Initialise with Arabic
+    setLang('ar');
+
+    // ── Tab switching ─────────────────────────────────────────────────────────
+    function switchTab(tab) {
+      const isLogin = tab === 'login';
+      document.getElementById('form-login').classList.toggle('hidden', !isLogin);
+      document.getElementById('form-signup').classList.toggle('hidden', isLogin);
+      document.getElementById('tab-login').className =
+        (isLogin ? 'tab-active' : 'tab-inactive bg-slate-50') +
+        ' flex-1 py-4 text-sm font-bold transition rounded-tl-3xl';
+      document.getElementById('tab-signup').className =
+        (!isLogin ? 'tab-active' : 'tab-inactive bg-slate-50') +
+        ' flex-1 py-4 text-sm font-bold transition rounded-tr-3xl';
+    }
+
+    // ── Toast ─────────────────────────────────────────────────────────────────
+    function showToast(msg, ok = true) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.style.background = ok ? '#22c55e' : '#ef4444';
+      t.style.color = '#fff';
+      t.style.display = 'block';
+      setTimeout(() => { t.style.display = 'none'; }, 4000);
+    }
+
+    // ── Check URL params (OAuth result) ───────────────────────────────────────
+    (function () {
+      const params = new URLSearchParams(location.search);
+      if (params.get('success')) {
+        showToast(html.lang === 'ar' ? 'تم تسجيل الدخول بنجاح!' : 'Logged in successfully!');
+        history.replaceState({}, '', location.pathname);
+        setTimeout(() => location.href = 'index.html', 1500);
+      }
+      if (params.get('error')) {
+        const provider = params.get('error');
+        showToast(
+          html.lang === 'ar'
+            ? `فشل تسجيل الدخول عبر ${provider === 'google' ? 'Google' : 'Apple'}.`
+            : `Sign in with ${provider === 'google' ? 'Google' : 'Apple'} failed.`,
+          false
+        );
+        history.replaceState({}, '', location.pathname);
+      }
+    })();
+
+    // ── Login ─────────────────────────────────────────────────────────────────
+    async function submitLogin(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btn-login-submit');
+      btn.disabled = true;
+      btn.textContent = html.lang === 'ar' ? 'جارٍ التحقق...' : 'Signing in...';
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({
+            email:    document.getElementById('login-email').value,
+            password: document.getElementById('login-password').value
+          })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error);
+        showToast(html.lang === 'ar' ? 'مرحباً، ' + data.user.name + '!' : 'Welcome, ' + data.user.name + '!');
+        setTimeout(() => location.href = 'index.html', 1500);
+      } catch (err) {
+        showToast(err.message, false);
+        btn.disabled = false;
+        btn.textContent = html.lang === 'ar' ? 'تسجيل الدخول' : 'Login';
+      }
+    }
+
+    // ── Signup ────────────────────────────────────────────────────────────────
+    async function submitSignup(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btn-signup-submit');
+      btn.disabled = true;
+      btn.textContent = html.lang === 'ar' ? 'جارٍ الإنشاء...' : 'Creating account...';
+
+      try {
+        const res = await fetch('/api/auth/signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({
+            name:     document.getElementById('signup-name').value,
+            email:    document.getElementById('signup-email').value,
+            password: document.getElementById('signup-password').value
+          })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error);
+        showToast(html.lang === 'ar' ? 'تم إنشاء الحساب بنجاح!' : 'Account created!');
+        setTimeout(() => location.href = 'index.html', 1500);
+      } catch (err) {
+        showToast(err.message, false);
+        btn.disabled = false;
+        btn.textContent = html.lang === 'ar' ? 'إنشاء حساب' : 'Create Account';
+      }
+    }
+  </script>
+</body>
+</html>
