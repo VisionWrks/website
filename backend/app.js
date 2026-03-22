@@ -1,5 +1,13 @@
 require('dotenv').config();
 
+// ─── Guard required env vars ──────────────────────────────────────────────────
+const REQUIRED = ['MONGODB_URI', 'SESSION_SECRET'];
+const missing  = REQUIRED.filter(k => !process.env[k]);
+if (missing.length) {
+  console.error('[Startup] Missing required env vars:', missing.join(', '));
+  // Don't crash the process — return a 500 with a helpful message instead
+}
+
 const express    = require('express');
 const session    = require('express-session');
 const MongoStore = require('connect-mongo');
@@ -50,9 +58,9 @@ app.use(session({
   resave:            false,
   saveUninitialized: false,
   store: MongoStore.create({
-    mongooseConnection: mongoose.connection,  // reuse the same connection
-    ttl:                24 * 60 * 60,
-    autoRemove:         'native'
+    mongoUrl:   process.env.MONGODB_URI,
+    ttl:        24 * 60 * 60,
+    autoRemove: 'native'
   }),
   cookie: {
     maxAge:   24 * 60 * 60 * 1000,
