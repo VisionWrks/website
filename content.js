@@ -49,6 +49,11 @@ const PORTFOLIO = [
 
 const TUTORIALS = [
     {
+        embed: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7442202342114017280?compact=1",
+        en: { title: "QumraOne in Action", desc: "See how QumraOne AI camera performs visual inspection on a real automotive assembly line." },
+        ar: { title: "QumraOne في العمل", desc: "شاهد كيف تؤدي كاميرا QumraOne بالذكاء الاصطناعي الفحص البصري على خط تجميع سيارات حقيقي." }
+    },
+    {
         embed: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7441111127868039168?compact=1",
         en: { title: "QumraOne in Action", desc: "See how QumraOne AI camera performs visual inspection on a real automotive assembly line." },
         ar: { title: "QumraOne في العمل", desc: "شاهد كيف تؤدي كاميرا QumraOne بالذكاء الاصطناعي الفحص البصري على خط تجميع سيارات حقيقي." }
