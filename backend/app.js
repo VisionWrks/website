@@ -78,7 +78,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // ─── API Routes ───────────────────────────────────────────────────────────────
-app.use('/api/auth', require('./routes/auth'));
+app.use('/api/auth',        require('./routes/auth'));
+app.use('/api/inspections', require('./routes/inspections'));
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 
 // ─── Static Files ─────────────────────────────────────────────────────────────
