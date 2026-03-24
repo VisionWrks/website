@@ -36,6 +36,9 @@
                        data-en="Login" data-ar="تسجيل الدخول">تسجيل الدخول</a>
                     <div id="nav-user" class="hidden items-center gap-2">
                         <span id="nav-username" class="text-sm font-bold text-slate-700"></span>
+                        <a href="/dashboard.html"
+                           class="text-xs font-bold text-brand border border-brand rounded-lg px-3 py-1.5 hover:opacity-80 transition"
+                           data-en="Dashboard" data-ar="لوحة التحكم">لوحة التحكم</a>
                         <button onclick="doLogout()"
                             class="text-xs font-bold text-slate-400 hover:text-brand transition"
                             data-en="Logout" data-ar="خروج">خروج</button>
@@ -62,8 +65,11 @@
                    data-en="Login / Sign Up" data-ar="تسجيل الدخول / إنشاء حساب">تسجيل الدخول / إنشاء حساب</a>
                 <div id="mobile-user" class="hidden px-4 py-2 flex items-center justify-between">
                     <span id="mobile-username" class="text-sm font-bold text-slate-700"></span>
-                    <button onclick="doLogout()" class="text-xs font-bold text-slate-400 hover:text-brand transition"
-                        data-en="Logout" data-ar="خروج">خروج</button>
+                    <div class="flex items-center gap-3">
+                        <a href="/dashboard.html" class="text-xs font-bold text-brand" data-en="Dashboard" data-ar="لوحة التحكم">لوحة التحكم</a>
+                        <button onclick="doLogout()" class="text-xs font-bold text-slate-400 hover:text-brand transition"
+                            data-en="Logout" data-ar="خروج">خروج</button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -6,6 +6,7 @@
   <title>VisionWorks | Dashboard</title>
   <link rel="icon" href="media/favicon.png" type="image/png">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
   <style>
     :root { --brand: #e9528d; }
@@ -13,13 +14,17 @@
     .bg-brand     { background-color: var(--brand); }
     body          { font-family: 'Almarai', sans-serif; min-height: 100dvh; }
 
-    .status-completed  { background: #22c55e22; color: #22c55e; }
-    .status-skipped    { background: #f59e0b22; color: #f59e0b; }
-    .status-failed     { background: #ef444422; color: #ef4444; }
+    .status-completed   { background: #22c55e22; color: #22c55e; }
+    .status-skipped     { background: #f59e0b22; color: #f59e0b; }
+    .status-failed      { background: #ef444422; color: #ef4444; }
     .status-in_progress { background: #3b82f622; color: #3b82f6; }
 
     .session-card { transition: transform .15s, box-shadow .15s; cursor: pointer; }
     .session-card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px #0007; }
+
+    .tab-chart-active   { background: var(--brand); color: #fff; }
+    .tab-chart-inactive { color: #94a3b8; }
+    .tab-chart-inactive:hover { color: #fff; }
 
     .spinner {
       display: inline-block; width: 2rem; height: 2rem;
@@ -31,7 +36,7 @@
     /* Modal */
     #modal-overlay {
       position: fixed; inset: 0; background: #000a; z-index: 200;
-      display: flex; align-items: center; justify-content: center; padding: 1rem;
+      align-items: center; justify-content: center; padding: 1rem;
     }
   </style>
 </head>
@@ -71,7 +76,7 @@
       <p id="page-subtitle" class="text-slate-400 mt-1 text-sm">جلسات الفحص الخاصة بك</p>
     </div>
 
-    <!-- Stats (hidden until data loads) -->
+    <!-- Stats cards -->
     <div id="stats-section" class="hidden mb-8 grid grid-cols-2 md:grid-cols-4 gap-4">
       <div class="bg-slate-800 rounded-2xl p-5">
         <p id="lbl-total"    class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">إجمالي الجلسات</p>
@@ -91,6 +96,69 @@
       </div>
     </div>
 
+    <!-- Analytics charts -->
+    <div id="charts-section" class="hidden mb-10">
+
+      <!-- Header + Tabs -->
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+        <h2 id="analytics-title" class="text-base font-black text-slate-300 uppercase tracking-wider">التحليلات</h2>
+        <div class="flex bg-slate-800 p-1 rounded-xl gap-1">
+          <button id="tab-month" onclick="switchChartTab('month')"
+            class="tab-chart-active text-xs font-bold px-4 py-2 rounded-lg transition"
+            data-en="By Month" data-ar="حسب الشهر">حسب الشهر</button>
+          <button id="tab-day" onclick="switchChartTab('day')"
+            class="tab-chart-inactive text-xs font-bold px-4 py-2 rounded-lg transition"
+            data-en="By Day" data-ar="حسب اليوم">حسب اليوم</button>
+          <button id="tab-hour" onclick="switchChartTab('hour')"
+            class="tab-chart-inactive text-xs font-bold px-4 py-2 rounded-lg transition"
+            data-en="By Hour" data-ar="حسب الساعة">حسب الساعة</button>
+          <button id="tab-line" onclick="switchChartTab('line')"
+            class="tab-chart-inactive text-xs font-bold px-4 py-2 rounded-lg transition"
+            data-en="By Line" data-ar="حسب الخط">حسب الخط</button>
+        </div>
+      </div>
+
+      <!-- Bar chart (switches per tab) -->
+      <div class="bg-slate-800 rounded-2xl p-5 mb-4">
+        <canvas id="chart-bar" height="90"></canvas>
+      </div>
+
+      <!-- Doughnut charts row -->
+      <div class="grid grid-cols-2 gap-4">
+
+        <!-- Session success rate -->
+        <div class="bg-slate-800 rounded-2xl p-6">
+          <p id="pie-sessions-lbl" class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-5">نسبة نجاح الجلسات</p>
+          <div class="flex items-center gap-6">
+            <div class="relative flex-shrink-0" style="width:150px;height:150px">
+              <canvas id="chart-pie-sessions" width="150" height="150"></canvas>
+              <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                <span id="pie-sessions-pct" class="text-2xl font-black text-white"></span>
+                <span id="pie-sessions-sub" class="text-xs text-slate-400"></span>
+              </div>
+            </div>
+            <div id="pie-sessions-legend" class="space-y-2.5 flex-1"></div>
+          </div>
+        </div>
+
+        <!-- Step success rate -->
+        <div class="bg-slate-800 rounded-2xl p-6">
+          <p id="pie-steps-lbl" class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-5">نسبة نجاح الخطوات</p>
+          <div class="flex items-center gap-6">
+            <div class="relative flex-shrink-0" style="width:150px;height:150px">
+              <canvas id="chart-pie-steps" width="150" height="150"></canvas>
+              <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                <span id="pie-steps-pct" class="text-2xl font-black text-white"></span>
+                <span id="pie-steps-sub" class="text-xs text-slate-400"></span>
+              </div>
+            </div>
+            <div id="pie-steps-legend" class="space-y-2.5 flex-1"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <!-- Loading spinner -->
     <div id="loading" class="flex flex-col items-center justify-center py-24 gap-4">
       <div class="spinner"></div>
@@ -105,13 +173,29 @@
       <p id="empty-text" class="text-slate-400 text-lg font-bold">لا توجد جلسات فحص بعد</p>
     </div>
 
-    <!-- Sessions list -->
-    <div id="sessions-list" class="hidden space-y-4"></div>
+    <!-- Sessions list header + cards -->
+    <div id="sessions-wrapper" class="hidden">
+      <h2 id="sessions-title" class="text-base font-black text-slate-300 uppercase tracking-wider mb-4">الجلسات</h2>
+      <div id="sessions-list" class="space-y-4"></div>
+    </div>
 
   </main>
 
+  <!-- ── Mobile blocker ───────────────────────────────────────────────────── -->
+  <div id="mobile-blocker" class="md:hidden fixed inset-0 bg-slate-950 z-[300] flex flex-col items-center justify-center text-center px-8 gap-6">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+    </svg>
+    <div>
+      <p id="mobile-msg-title" class="text-xl font-black text-white mb-2">استخدم سطح المكتب</p>
+      <p id="mobile-msg-sub" class="text-slate-400 text-sm">لوحة التحكم متاحة على شاشات أكبر فقط. يرجى فتحها من جهاز كمبيوتر.</p>
+    </div>
+    <a href="/index.html" class="text-xs font-bold text-brand border border-brand rounded-xl px-5 py-2.5 hover:opacity-80 transition"
+       data-en="Back to Home" data-ar="العودة للرئيسية">العودة للرئيسية</a>
+  </div>
+
   <!-- ── Step-detail modal ─────────────────────────────────────────────────── -->
-  <div id="modal-overlay" class="hidden" onclick="closeModal(event)">
+  <div id="modal-overlay" style="display:none" onclick="closeModal(event)">
     <div class="bg-slate-900 rounded-3xl shadow-2xl w-full max-w-2xl max-h-[80vh] flex flex-col overflow-hidden"
          onclick="event.stopPropagation()">
 
@@ -129,17 +213,26 @@
     const API_BASE  = '';
     let currentLang = 'ar';
     let allSessions = [];
+    const chartInstances = {};
+    let activeChartTab  = 'month';
+    let chartData       = {};
 
     // ── Translations ──────────────────────────────────────────────────────────
     const T = {
-      'page-title':    { en: 'Inspection Dashboard',       ar: 'لوحة تحكم الفحص' },
-      'page-subtitle': { en: 'Your inspection sessions',   ar: 'جلسات الفحص الخاصة بك' },
-      'lbl-total':     { en: 'Total Sessions',             ar: 'إجمالي الجلسات' },
-      'lbl-completed': { en: 'Completed',                  ar: 'مكتملة' },
-      'lbl-steps':     { en: 'Total Steps',                ar: 'إجمالي الخطوات' },
-      'lbl-avg-dur':   { en: 'Avg Duration (s)',           ar: 'متوسط المدة (ث)' },
-      'loading-text':  { en: 'Loading data…',              ar: 'جارٍ تحميل البيانات…' },
-      'empty-text':    { en: 'No inspection sessions yet', ar: 'لا توجد جلسات فحص بعد' },
+      'page-title':       { en: 'Inspection Dashboard',       ar: 'لوحة تحكم الفحص' },
+      'page-subtitle':    { en: 'Your inspection sessions',   ar: 'جلسات الفحص الخاصة بك' },
+      'lbl-total':        { en: 'Total Sessions',             ar: 'إجمالي الجلسات' },
+      'lbl-completed':    { en: 'Completed',                  ar: 'مكتملة' },
+      'lbl-steps':        { en: 'Total Steps',                ar: 'إجمالي الخطوات' },
+      'lbl-avg-dur':      { en: 'Avg Duration (s)',           ar: 'متوسط المدة (ث)' },
+      'loading-text':     { en: 'Loading data…',              ar: 'جارٍ تحميل البيانات…' },
+      'empty-text':       { en: 'No inspection sessions yet', ar: 'لا توجد جلسات فحص بعد' },
+      'analytics-title':   { en: 'Analytics',              ar: 'التحليلات' },
+      'pie-sessions-lbl':  { en: 'Session Success Rate',  ar: 'نسبة نجاح الجلسات' },
+      'pie-steps-lbl':     { en: 'Step Success Rate',     ar: 'نسبة نجاح الخطوات' },
+      'sessions-title':    { en: 'Sessions',                                                          ar: 'الجلسات' },
+      'mobile-msg-title':  { en: 'Use a Desktop',                                                     ar: 'استخدم سطح المكتب' },
+      'mobile-msg-sub':    { en: 'The dashboard is only available on larger screens. Please open it from a computer.', ar: 'لوحة التحكم متاحة على شاشات أكبر فقط. يرجى فتحها من جهاز كمبيوتر.' },
     };
 
     const STATUS_LABELS = {
@@ -147,6 +240,11 @@
       skipped:     { en: 'Skipped',     ar: 'متخطاة' },
       failed:      { en: 'Failed',      ar: 'فاشلة' },
       in_progress: { en: 'In Progress', ar: 'جارية' },
+    };
+
+    const DAY_NAMES = {
+      en: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      ar: ['أحد', 'اثنين', 'ثلاثاء', 'أربعاء', 'خميس', 'جمعة', 'سبت'],
     };
 
     // ── Language ──────────────────────────────────────────────────────────────
@@ -172,7 +270,10 @@
         if (el) el.textContent = texts[lang];
       }
 
-      if (allSessions.length) renderSessions(allSessions);
+      if (allSessions.length) {
+        renderSessions(allSessions);
+        renderCharts(allSessions);
+      }
     }
 
     // ── Auth ──────────────────────────────────────────────────────────────────
@@ -212,6 +313,7 @@
       }
 
       renderStats(allSessions);
+      renderCharts(allSessions);
       renderSessions(allSessions);
     }
 
@@ -233,6 +335,172 @@
       document.getElementById('stat-avg-dur').textContent   = avgDur;
 
       document.getElementById('stats-section').classList.remove('hidden');
+    }
+
+    // ── Charts ────────────────────────────────────────────────────────────────
+    function lineOptions() {
+      return {
+        responsive: true,
+        maintainAspectRatio: true,
+        animation: { duration: 600, easing: 'easeInOutQuart' },
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8', font: { family: 'Almarai', size: 11 } } },
+          y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8', font: { family: 'Almarai', size: 11 }, stepSize: 1 }, beginAtZero: true },
+        },
+      };
+    }
+
+    function switchChartTab(tab) {
+      activeChartTab = tab;
+      ['month', 'day', 'hour', 'line'].forEach(t => {
+        document.getElementById(`tab-${t}`).className =
+          (t === tab ? 'tab-chart-active' : 'tab-chart-inactive') +
+          ' text-xs font-bold px-4 py-2 rounded-lg transition';
+      });
+      renderLineChart();
+      renderPieCharts(allSessions);
+    }
+
+    function renderLineChart() {
+      const COLOR = { month: '#e9528d', day: '#3b82f6', hour: '#22c55e', line: '#a78bfa' };
+      const TAB_CFG = {
+        month: { labels: chartData.sortedMonths, data: chartData.sortedMonths.map(k => chartData.byMonth[k]) },
+        day:   { labels: DAY_NAMES[currentLang],  data: chartData.byDay },
+        hour:  { labels: Array.from({ length: 24 }, (_, i) => `${String(i).padStart(2, '0')}:00`), data: chartData.byHour },
+        line:  { labels: chartData.lineIds,        data: chartData.lineIds.map(l => chartData.byLine[l]) },
+      };
+      const { labels, data } = TAB_CFG[activeChartTab];
+      const color = COLOR[activeChartTab];
+
+      if (chartInstances['chart-bar']) chartInstances['chart-bar'].destroy();
+      chartInstances['chart-bar'] = new Chart(document.getElementById('chart-bar'), {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [{
+            data,
+            borderColor:          color,
+            backgroundColor:      color + '18',
+            borderWidth:          2.5,
+            fill:                 true,
+            tension:              0.4,
+            pointRadius:          5,
+            pointHoverRadius:     8,
+            pointBackgroundColor: color,
+            pointBorderColor:     '#0f172a',
+            pointBorderWidth:     2,
+          }],
+        },
+        options: lineOptions(),
+      });
+    }
+
+    function renderPieCharts(sessions) {
+      const PIE_COLORS  = ['#22c55e', '#f59e0b', '#ef4444'];
+      const statusLabels = [
+        STATUS_LABELS.completed[currentLang],
+        STATUS_LABELS.skipped[currentLang],
+        STATUS_LABELS.failed[currentLang],
+      ];
+      const successLabel = currentLang === 'ar' ? 'نجاح' : 'Success';
+
+      function countStatuses(arr) {
+        return [
+          arr.filter(x => x.status === 'completed').length,
+          arr.filter(x => x.status === 'skipped').length,
+          arr.filter(x => x.status === 'failed').length,
+        ];
+      }
+
+      // Decide what each pie shows based on active tab
+      let pie1, pie2;
+      if (activeChartTab === 'line') {
+        // One pie per production line
+        const ids  = chartData.lineIds;
+        const id1  = ids[0] || '', id2 = ids[1] || '';
+        pie1 = { title: id1.toUpperCase(), counts: countStatuses(sessions.filter(s => s.line_id === id1)) };
+        pie2 = { title: id2.toUpperCase(), counts: countStatuses(sessions.filter(s => s.line_id === id2)) };
+      } else if (activeChartTab === 'day') {
+        // Weekdays (Mon–Fri) vs Weekend (Sat–Sun)
+        const weekday = sessions.filter(s => { const d = new Date(s.started_at).getDay(); return d >= 1 && d <= 5; });
+        const weekend = sessions.filter(s => { const d = new Date(s.started_at).getDay(); return d === 0 || d === 6; });
+        pie1 = { title: currentLang === 'ar' ? 'أيام الأسبوع' : 'Weekdays', counts: countStatuses(weekday) };
+        pie2 = { title: currentLang === 'ar' ? 'نهاية الأسبوع' : 'Weekend',  counts: countStatuses(weekend) };
+      } else if (activeChartTab === 'hour') {
+        // Morning shift (06-14) vs Afternoon shift (14-22)
+        const morning   = sessions.filter(s => { const h = new Date(s.started_at).getHours(); return h >= 6 && h < 14; });
+        const afternoon = sessions.filter(s => { const h = new Date(s.started_at).getHours(); return h >= 14 && h < 22; });
+        pie1 = { title: currentLang === 'ar' ? 'وردية الصباح'  : 'Morning Shift',    counts: countStatuses(morning) };
+        pie2 = { title: currentLang === 'ar' ? 'وردية العصر'   : 'Afternoon Shift',  counts: countStatuses(afternoon) };
+      } else {
+        // By month: session success vs step success (overall)
+        const allSteps = sessions.flatMap(s => s.steps || []);
+        pie1 = { title: currentLang === 'ar' ? 'نسبة نجاح الجلسات' : 'Session Success', counts: countStatuses(sessions) };
+        pie2 = { title: currentLang === 'ar' ? 'نسبة نجاح الخطوات' : 'Step Success',    counts: countStatuses(allSteps) };
+      }
+
+      document.getElementById('pie-sessions-lbl').textContent = pie1.title;
+      document.getElementById('pie-steps-lbl').textContent    = pie2.title;
+
+      function buildPie(canvasId, counts, pctElId, subElId, legendElId) {
+        const total = counts.reduce((a, b) => a + b, 0);
+        const pct   = total ? Math.round(counts[0] / total * 100) : 0;
+
+        document.getElementById(pctElId).textContent = `${pct}%`;
+        document.getElementById(subElId).textContent  = successLabel;
+        document.getElementById(legendElId).innerHTML = statusLabels.map((lbl, i) => {
+          const p = total ? Math.round(counts[i] / total * 100) : 0;
+          return `<div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:${PIE_COLORS[i]}"></span>
+            <span class="text-slate-300 text-xs">${lbl}</span>
+            <span class="text-white font-black text-xs ml-auto">${p}%</span>
+          </div>`;
+        }).join('');
+
+        if (chartInstances[canvasId]) chartInstances[canvasId].destroy();
+        chartInstances[canvasId] = new Chart(document.getElementById(canvasId), {
+          type: 'doughnut',
+          data: { labels: statusLabels, datasets: [{ data: counts, backgroundColor: PIE_COLORS, borderWidth: 0, hoverOffset: 6 }] },
+          options: {
+            responsive: false,
+            cutout: '72%',
+            animation: { animateRotate: true, duration: 600 },
+            plugins: {
+              legend: { display: false },
+              tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${total ? Math.round(ctx.parsed / total * 100) : 0}%` } },
+            },
+          },
+        });
+      }
+
+      buildPie('chart-pie-sessions', pie1.counts, 'pie-sessions-pct', 'pie-sessions-sub', 'pie-sessions-legend');
+      buildPie('chart-pie-steps',    pie2.counts, 'pie-steps-pct',    'pie-steps-sub',    'pie-steps-legend');
+    }
+
+    function renderCharts(sessions) {
+      const byMonth = {}, byDay = Array(7).fill(0), byHour = Array(24).fill(0), byLine = {};
+
+      sessions.forEach(s => {
+        if (s.started_at) {
+          const d = new Date(s.started_at);
+          const mk = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+          byMonth[mk] = (byMonth[mk] || 0) + 1;
+          byDay[d.getDay()]++;
+          byHour[d.getHours()]++;
+        }
+        if (s.line_id) byLine[s.line_id] = (byLine[s.line_id] || 0) + 1;
+      });
+
+      chartData = {
+        byMonth, byDay, byHour, byLine,
+        sortedMonths: Object.keys(byMonth).sort(),
+        lineIds: Object.keys(byLine).sort(),
+      };
+
+      renderLineChart();
+      renderPieCharts(sessions);
+      document.getElementById('charts-section').classList.remove('hidden');
     }
 
     // ── Helpers ───────────────────────────────────────────────────────────────
@@ -263,22 +531,22 @@
     function renderSessions(sessions) {
       const list = document.getElementById('sessions-list');
       list.innerHTML = '';
-      list.classList.remove('hidden');
+      document.getElementById('sessions-wrapper').classList.remove('hidden');
 
       const L = {
-        line:     { en: 'Line',             ar: 'الخط' },
-        started:  { en: 'Started',          ar: 'البدء' },
-        duration: { en: 'Duration',         ar: 'المدة' },
-        steps:    { en: 'Steps',            ar: 'الخطوات' },
-        fails:    { en: 'Failed Attempts',  ar: 'محاولات الفشل' },
-        view:     { en: 'View Steps',       ar: 'عرض الخطوات' },
-        session:  { en: 'Session',          ar: 'الجلسة' },
+        line:     { en: 'Line',            ar: 'الخط' },
+        started:  { en: 'Started',         ar: 'البدء' },
+        duration: { en: 'Duration',        ar: 'المدة' },
+        steps:    { en: 'Steps',           ar: 'الخطوات' },
+        fails:    { en: 'Failed Attempts', ar: 'محاولات الفشل' },
+        view:     { en: 'View Steps',      ar: 'عرض الخطوات' },
+        session:  { en: 'Session',         ar: 'الجلسة' },
       };
 
       sessions.forEach(s => {
-        const stepCount       = s.steps?.length || 0;
-        const completedSteps  = s.steps?.filter(st => st.status === 'completed').length || 0;
-        const failedAttempts  = s.steps?.reduce((a, st) => a + (st.failed_attempts || 0), 0) || 0;
+        const stepCount      = s.steps?.length || 0;
+        const completedSteps = s.steps?.filter(st => st.status === 'completed').length || 0;
+        const failedAttempts = s.steps?.reduce((a, st) => a + (st.failed_attempts || 0), 0) || 0;
 
         const card = document.createElement('div');
         card.className = 'bg-slate-800 rounded-2xl p-5 session-card select-none';
@@ -292,7 +560,6 @@
             </div>
             ${statusBadge(s.status)}
           </div>
-
           <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm mb-4">
             <div>
               <p class="text-slate-400 text-xs mb-0.5">${L.started[currentLang]}</p>
@@ -311,12 +578,9 @@
               <p class="font-bold ${failedAttempts > 0 ? 'text-red-400' : 'text-white'}">${failedAttempts}</p>
             </div>
           </div>
-
           ${stepCount > 0 ? `
           <div class="border-t border-slate-700 pt-3">
-            <button class="text-brand text-xs font-bold hover:underline">
-              ${L.view[currentLang]} &rarr;
-            </button>
+            <button class="text-brand text-xs font-bold hover:underline">${L.view[currentLang]} &rarr;</button>
           </div>` : ''}
         `;
         card.addEventListener('click', () => openModal(s));
@@ -368,18 +632,17 @@
         </div>
       `).join('');
 
-      document.getElementById('modal-overlay').classList.remove('hidden');
+      document.getElementById('modal-overlay').style.display = 'flex';
     }
 
     function closeModal(e) {
       if (!e || e.target === document.getElementById('modal-overlay')) {
-        document.getElementById('modal-overlay').classList.add('hidden');
+        document.getElementById('modal-overlay').style.display = 'none';
       }
     }
 
-    // Close modal on Escape
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') document.getElementById('modal-overlay').classList.add('hidden');
+      if (e.key === 'Escape') document.getElementById('modal-overlay').style.display = 'none';
     });
 
     // ── Bootstrap ─────────────────────────────────────────────────────────────
