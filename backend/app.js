@@ -51,6 +51,9 @@ app.use(cors({
   credentials: true
 }));
 
+// ─── Health check (before session middleware so it never blocks) ──────────────
+app.get('/api/health', (_req, res) => res.json({ status: 'ok' }));
+
 // ─── Body Parsing ─────────────────────────────────────────────────────────────
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -61,9 +64,10 @@ app.use(session({
   resave:            false,
   saveUninitialized: false,
   store: MongoStore.create({
-    mongoUrl:   process.env.MONGODB_URI,
-    ttl:        24 * 60 * 60,
-    autoRemove: 'native'
+    mongoUrl:         process.env.MONGODB_URI,
+    ttl:              24 * 60 * 60,
+    autoRemove:       'native',
+    mongooseConnection: mongoose.connection,
   }),
   cookie: {
     maxAge:   24 * 60 * 60 * 1000,
@@ -80,12 +84,21 @@ app.use(passport.session());
 // ─── API Routes ───────────────────────────────────────────────────────────────
 app.use('/api/auth',        require('./routes/auth'));
 app.use('/api/inspections', require('./routes/inspections'));
-app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 
 // ─── Static Files ─────────────────────────────────────────────────────────────
 const path      = require('path');
 const SITE_ROOT = path.join(__dirname, '..');
-app.use(express.static(SITE_ROOT));
-app.get('*', (req, res) => res.sendFile(path.join(SITE_ROOT, 'index.html')));
+app.use(express.static(SITE_ROOT, {
+  setHeaders(res, filePath) {
+    if (filePath.endsWith('.html')) {
+      res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    }
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+  }
+}));
+app.get('*', (_req, res) => {
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.sendFile(path.join(SITE_ROOT, 'index.html'));
+});
 
 module.exports = app;
