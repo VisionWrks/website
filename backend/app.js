@@ -85,20 +85,22 @@ app.use(passport.session());
 app.use('/api/auth',        require('./routes/auth'));
 app.use('/api/inspections', require('./routes/inspections'));
 
-// ─── Static Files ─────────────────────────────────────────────────────────────
-const path      = require('path');
-const SITE_ROOT = path.join(__dirname, '..');
-app.use(express.static(SITE_ROOT, {
-  setHeaders(res, filePath) {
-    if (filePath.endsWith('.html')) {
-      res.setHeader('Content-Type', 'text/html; charset=utf-8');
+// ─── Static Files (skip on Vercel — it serves static files automatically) ────
+if (!process.env.VERCEL) {
+  const path      = require('path');
+  const SITE_ROOT = path.join(__dirname, '..');
+  app.use(express.static(SITE_ROOT, {
+    setHeaders(res, filePath) {
+      if (filePath.endsWith('.html')) {
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+      }
+      res.setHeader('X-Content-Type-Options', 'nosniff');
     }
-    res.setHeader('X-Content-Type-Options', 'nosniff');
-  }
-}));
-app.get('*', (_req, res) => {
-  res.setHeader('Content-Type', 'text/html; charset=utf-8');
-  res.sendFile(path.join(SITE_ROOT, 'index.html'));
-});
+  }));
+  app.get('*', (_req, res) => {
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.sendFile(path.join(SITE_ROOT, 'index.html'));
+  });
+}
 
 module.exports = app;
