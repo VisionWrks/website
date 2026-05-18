@@ -85,6 +85,15 @@ app.use(passport.session());
 app.use('/api/auth',        require('./routes/auth'));
 app.use('/api/inspections', require('./routes/inspections'));
 
+// ─── Global Error Handler (return JSON, not HTML) ────────────────────────────
+app.use((err, req, res, next) => {
+  console.error('[Error]', err);
+  res.status(err.status || 500).json({
+    error: err.message || 'Internal server error',
+    stack: process.env.NODE_ENV === 'production' ? undefined : err.stack
+  });
+});
+
 // ─── Static Files (skip on Vercel — it serves static files automatically) ────
 if (!process.env.VERCEL) {
   const path      = require('path');
