@@ -23,17 +23,36 @@ const app = express();
 app.set('trust proxy', 1);
 
 // ─── Database (cached for serverless) ────────────────────────────────────────
-mongoose.set('bufferCommands', false);  // don't queue ops while disconnected
+let dbPromise = null;
 
-if (mongoose.connection.readyState === 0) {
-  mongoose.connect(process.env.MONGODB_URI, {
-    serverSelectionTimeoutMS: 5000,   // fail fast instead of hanging
-    socketTimeoutMS:          45000,
-    maxPoolSize:              1        // one connection per serverless instance
-  })
-    .then(() => console.log('[DB] MongoDB connected'))
-    .catch(err => console.error('[DB] Connection error:', err));
+function connectDB() {
+  if (mongoose.connection.readyState === 1) {
+    return Promise.resolve();
+  }
+  if (!dbPromise) {
+    dbPromise = mongoose.connect(process.env.MONGODB_URI, {
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
+      maxPoolSize: 1
+    }).then(() => {
+      console.log('[DB] MongoDB connected');
+    }).catch(err => {
+      dbPromise = null;
+      throw err;
+    });
+  }
+  return dbPromise;
 }
+
+// Middleware to ensure DB connection before handling requests
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    res.status(500).json({ error: 'Database connection failed: ' + err.message });
+  }
+});
 
 // ─── CORS (allow same-origin + configured origins) ───────────────────────────
 app.use(cors({
