@@ -35,19 +35,9 @@ if (mongoose.connection.readyState === 0) {
     .catch(err => console.error('[DB] Connection error:', err));
 }
 
-// ─── CORS ─────────────────────────────────────────────────────────────────────
-const allowedOrigins = (process.env.FRONTEND_URL || '')
-  .split(',')
-  .map(o => o.trim())
-  .filter(Boolean);
-
+// ─── CORS (allow same-origin + configured origins) ───────────────────────────
 app.use(cors({
-  origin: allowedOrigins.length
-    ? (origin, cb) => {
-        if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
-        cb(new Error(`CORS: origin ${origin} not allowed`));
-      }
-    : true,
+  origin: true,
   credentials: true
 }));
 
