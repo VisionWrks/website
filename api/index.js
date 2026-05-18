@@ -6,7 +6,9 @@ try {
   app = (req, res) => {
     res.status(500).json({
       error: 'Failed to load app',
-      message: err.message
+      message: err.message,
+      stack: err.stack,
+      code: err.code
     });
   };
 }
