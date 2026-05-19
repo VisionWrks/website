@@ -93,6 +93,7 @@ app.use(passport.session());
 // ─── API Routes ───────────────────────────────────────────────────────────────
 app.use('/api/auth',        require('./routes/auth'));
 app.use('/api/inspections', require('./routes/inspections'));
+app.use('/api/chat',        require('./routes/chat'));
 
 // ─── Global Error Handler (return JSON, not HTML) ────────────────────────────
 app.use((err, req, res, next) => {
