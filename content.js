@@ -60,16 +60,36 @@ const TUTORIALS = [
     },
 ];
 
-// To add a new post:
-//   1. Copy one block below
-//   2. Paste it at the top of the array (newest first)
-//   3. Fill in href, en (English text), and ar (Arabic text)
+// ─────────────────────────────────────────────
+//  LinkedIn Posts
+//  Two formats supported:
+//
+//  1. EMBEDDED POST (auto-updates from LinkedIn):
+//     { embed: "https://www.linkedin.com/embed/feed/update/urn:li:activity:XXXXX" }
+//
+//  2. TEXT CARD (manual content, bilingual):
+//     { href: "https://linkedin.com/...", en: "English text", ar: "Arabic text" }
+//
+//  How to get an embed URL:
+//    1. Open the LinkedIn post
+//    2. Click ••• menu → "Embed this post"
+//    3. Copy the src URL from the iframe code
+//    4. Paste it as the "embed" value below
+//
+//  Tip: Embedded posts show live likes/comments and look native!
+// ─────────────────────────────────────────────
 const POSTS = [
+    // Embedded post example - auto-syncs with LinkedIn
     {
-        href: "https://www.linkedin.com/feed/update/urn:li:activity:7437373275476992000",
-        en: "We're excited to share another milestone in our collaboration with Autocool as we kick off a second AI initiative focused on bus HVAC systems inspection 🚍🤖. Following the successful demo of the QumraOne AI camera on the W4 assembly line, we have now started training a new visual inspection model dedicated to Bus HVAC units.",
-        ar: "يسعدنا الإعلان عن بدء العمل على مشروع جديد لفحص أنظمة تكييف الحافلات باستخدام تقنيات الذكاء الاصطناعي، وذلك ضمن تعاوننا المستمر مع شركة أوتوكول 🚍🤖. بدأ فريقنا الآن مرحلة تدريب نموذج فحص بصري مخصص لوحدات تكييف الحافلات."
+        embed: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7462456991873966080"
     },
+    {
+        embed: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7449728745159995392"
+    },
+    {
+        embed: "https://www.linkedin.com/embed/feed/update/urn:li:activity:7437373275476992000"
+    },
+    // Text card examples - manual content with bilingual support
     {
         href: "https://www.linkedin.com/company/vision-works-ltd/",
         en: "A key milestone in automotive parts inspection and assembly in Egypt 🇪🇬🚗. The QumraOne AI camera is now fully integrated with Cleco wireless screwdrivers, enabling combined visual inspection and tightening torque verification directly on the assembly line.",

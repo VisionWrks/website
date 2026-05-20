@@ -448,7 +448,16 @@
         }
 
         function renderPosts() {
-            document.getElementById('posts-grid').innerHTML = POSTS.map((post, i) => `
+            document.getElementById('posts-grid').innerHTML = POSTS.map((post, i) => {
+                // Embedded LinkedIn post - auto-syncs with LinkedIn
+                if (post.embed) {
+                    return `
+                    <div class="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-slate-100" data-aos="fade-up" data-aos-delay="${i * 100}">
+                        <iframe src="${post.embed}" height="500" width="100%" frameborder="0" allowfullscreen title="LinkedIn post" class="w-full"></iframe>
+                    </div>`;
+                }
+                // Text card with manual bilingual content
+                return `
                 <a href="${post.href}" target="_blank" rel="noopener"
                    class="bg-white rounded-[2rem] p-8 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all flex flex-col gap-4" data-aos="fade-up" data-aos-delay="${i * 100}">
                     <div class="flex items-center gap-3">
@@ -461,7 +470,8 @@
                     </div>
                     <p class="text-slate-600 text-sm leading-relaxed flex-1" data-en="${post.en}" data-ar="${post.ar}">${post.ar}</p>
                     <span class="text-[#0A66C2] text-xs font-bold" data-en="View on LinkedIn →" data-ar="عرض على لينكدإن ←">عرض على لينكدإن ←</span>
-                </a>`).join('');
+                </a>`;
+            }).join('');
         }
 
         function renderTutorials() {
